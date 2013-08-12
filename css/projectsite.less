@@ -1,65 +1,84 @@
 /****************************/
 /*Project Site CSS*/
 /****************************/
+
+//COLOUR SCHEME
+@black: #000;
+@dark-blue: #225378;
+@med-blue: #1695a3;
+@light-blue: #acf0f2;
+@white: #fff;
+@orange: #eb7f00;
+
 html,
 body {
   background-color: #000;
 }
+
 header {
-  position: fixed;
+  position:fixed;
   width: 100%;
-  height: 50px;
+  height:50px;
   margin: 0 auto;
-  padding: 0;
-  background-color: #225378;
+  padding:0;
+  background-color: @dark-blue;
 }
+
 header h1 {
-  text-align: center;
+  text-align:center;
   margin: 0 auto;
 }
+
 #projectsTitle {
-  width: 960px;
+  width:960px;
   margin: 0 auto;
-  background-color: #eb7f00;
+  background-color: @orange;
 }
+
 #projectsTitle h2 {
   text-align: center;
 }
+
 #content {
-  overflow: auto;
+  overflow:auto;
   width: 960px;
   margin: 0 auto;
   padding: 50px;
-  background-color: #000000;
+  background-color: @black;
 }
+
 footer {
-  position: fixed;
-  left: 0px;
-  bottom: 0px;
-  width: 100%;
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  width:100%;
   height: 20px;
   margin: 0 auto;
-  background-color: #225378;
+  background-color: @dark-blue;
 }
+
 #projectList {
   list-style-type: none;
-  width: 960px;
-  height: 100%;
+  width:960px;
+  height:100%;
   margin: 60px auto;
   padding: 0;
-  background-color: #000000;
+  background-color: @black;
 }
+
 li {
-  border: 1px solid #ffffff;
+  border:1px solid #ffffff;
   margin: 10px 0;
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.1);
 }
+
 li h3 {
   margin: 0;
   padding: 5px 0 0 5px;
-  color: #ffffff;
+  color: @white;
 }
+
 li img {
   border: 1px solid #fff;
   margin: 5px;
@@ -67,11 +86,13 @@ li img {
   float: left;
   display: block;
 }
+
 li p {
   margin: 0;
   padding: 1px 5px;
-  color: #ffffff;
+  color: @white;
 }
+
 li a {
   margin: 0;
   padding: 5px;

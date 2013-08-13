@@ -10,6 +10,10 @@
 @white: #fff;
 @orange: #eb7f00;
 
+//Fonts
+@header: "sketchnote-square";
+@paragraph: "myriad-pro",sans-serif;
+
 html,
 body {
   background-color: #000;
@@ -27,6 +31,9 @@ header {
 header h1 {
   text-align:center;
   margin: 0 auto;
+  font-size: 50px;
+  font-family: @header;
+  color: @white;
 }
 
 #projectsTitle {
@@ -68,20 +75,22 @@ footer {
 
 li {
   border:1px solid #ffffff;
-  margin: 10px 0;
+  margin: 0;
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.1);
 }
 
 li h3 {
   margin: 0;
-  padding: 5px 0 0 5px;
+  padding: 16px 0 0 20px;
   color: @white;
 }
 
 li img {
+  width: 100px;
+  height: 50px;
   border: 1px solid #fff;
-  margin: 5px;
+  margin: 20px;
   padding: 0;
   float: left;
   display: block;
@@ -89,14 +98,23 @@ li img {
 
 li p {
   margin: 0;
-  padding: 1px 5px;
+  padding: 5px 20px;
+  font-family: @paragraph;
+  font-style: normal;
+  font-kerning: 30px;
+  text-align: justify;
   color: @white;
 }
 
 li a {
-  margin: 0;
-  padding: 5px;
+  margin: 0 30px 20px 0;
+  padding: 5px 5px 10px 5px;
   float: right;
   width: 50px;
   height: 25px;
+  color: @white;
+  font-size: 24px;
+  text-align: center;
+  text-decoration: none;
+  background-color: @orange;
 }

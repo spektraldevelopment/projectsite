@@ -14,10 +14,13 @@ header {
   background-color: #225378;
 }
 header h1 {
-  text-align: center;
-  margin: 0 auto;
-  font-size: 50px;
-  font-family: "sketchnote-square";
+  position: relative;
+  text-align: left;
+  top: -5px;
+  margin: 0 0 0 20px;
+  padding: 0;
+  font-size: 40px;
+  font-family: "subway-paris-sc", sans-serif;
   color: #ffffff;
 }
 #projectsTitle {
@@ -26,7 +29,16 @@ header h1 {
   background-color: #eb7f00;
 }
 #projectsTitle h2 {
+  position: relative;
+  margin: 0;
+  padding: 0;
   text-align: center;
+  text-transform: uppercase;
+  font-family: "proxima-nova", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  color: #ffffff;
 }
 #content {
   overflow: auto;
@@ -54,13 +66,16 @@ footer {
 }
 li {
   border: 1px solid #ffffff;
-  margin: 0;
+  margin: 0px 0px 20px 0px;
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.1);
 }
 li h3 {
   margin: 0;
   padding: 16px 0 0 20px;
+  font-style: normal;
+  font-weight: 400;
+  font-family: "proxima-nova", sans-serif;
   color: #ffffff;
 }
 li img {

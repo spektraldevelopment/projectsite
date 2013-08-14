@@ -11,8 +11,9 @@
 @orange: #eb7f00;
 
 //Fonts
-@header: "sketchnote-square";
-@paragraph: "myriad-pro",sans-serif;
+@header: "subway-paris-sc", sans-serif;
+@title: "proxima-nova", sans-serif;
+@paragraph: "myriad-pro", sans-serif;
 
 html,
 body {
@@ -29,9 +30,12 @@ header {
 }
 
 header h1 {
-  text-align:center;
-  margin: 0 auto;
-  font-size: 50px;
+  position: relative;
+  text-align:left;
+  top: -5px;
+  margin: 0 0 0 20px;
+  padding: 0;
+  font-size: 40px;
   font-family: @header;
   color: @white;
 }
@@ -43,7 +47,16 @@ header h1 {
 }
 
 #projectsTitle h2 {
+  position:relative;
+  margin: 0;
+  padding: 0;
   text-align: center;
+  text-transform: uppercase;
+  font-family: @title;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  color: @white;
 }
 
 #content {
@@ -75,7 +88,7 @@ footer {
 
 li {
   border:1px solid #ffffff;
-  margin: 0;
+  margin: 0px 0px 20px 0px;
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.1);
 }
@@ -83,6 +96,9 @@ li {
 li h3 {
   margin: 0;
   padding: 16px 0 0 20px;
+  font-style: normal;
+  font-weight: 400;
+  font-family: @title;
   color: @white;
 }
 

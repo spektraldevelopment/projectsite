@@ -26,6 +26,7 @@ header {
   height:50px;
   margin: 0 auto;
   padding:0;
+  z-index: 10;
   background-color: rgba(red(@dark-blue), green(@dark-blue), blue(@dark-blue), .95);
 }
 
@@ -60,10 +61,12 @@ header h1 {
 }
 
 #content {
+  position: relative;
   overflow:auto;
   width: 960px;
   margin: 0 auto;
   padding: 50px;
+  z-index: 0;
   background-color: @black;
 }
 

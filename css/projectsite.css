@@ -24,6 +24,10 @@ header h1 {
   font-family: "subway-paris-sc", sans-serif;
   color: #ffffff;
 }
+header h1 a {
+  text-decoration: none;
+  color: #ffffff;
+}
 #projectsTitle {
   width: 960px;
   margin: 20px auto;
@@ -41,7 +45,7 @@ header h1 {
   font-size: 40px;
   color: #ffffff;
 }
-#content {
+section {
   position: relative;
   overflow: auto;
   width: 960px;
@@ -85,14 +89,14 @@ li img {
   width: 100px;
   height: 50px;
   border: 1px solid #fff;
-  margin: 20px;
+  margin: 20px 20px 0px 20px;
   padding: 0;
   float: left;
   display: block;
 }
 li p {
   margin: 0;
-  padding: 5px 20px;
+  padding: 15px 20px;
   font-family: "myriad-pro", sans-serif;
   font-style: normal;
   font-kerning: 30px;

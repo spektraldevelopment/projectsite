@@ -54,15 +54,6 @@ section {
   z-index: 0;
   background-color: #000000;
 }
-footer {
-  position: fixed;
-  left: 0px;
-  bottom: 0px;
-  width: 100%;
-  height: 20px;
-  margin: 0 auto;
-  background-color: #225378;
-}
 #projectList {
   list-style-type: none;
   width: 960px;
@@ -114,4 +105,32 @@ li a {
   text-align: center;
   text-decoration: none;
   background-color: #eb7f00;
+}
+footer {
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 20px;
+  margin: 0 auto;
+  background-color: #225378;
+}
+#linkedIn {
+  position: relative;
+  margin: 2px 0px 0px 20px;
+  padding: 0;
+  float: left;
+  text-decoration: none;
+  font-size: 12px;
+  font-family: "myriad-pro", sans-serif;
+  color: #ffffff;
+}
+footer small {
+  position: relative;
+  margin: 2px 20px 0px 0px;
+  padding: 0;
+  float: right;
+  font-size: 12px;
+  font-family: "myriad-pro", sans-serif;
+  color: #ffffff;
 }

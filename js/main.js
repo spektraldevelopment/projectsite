@@ -2,9 +2,11 @@ $(document).ready(function(){
 
     //Vars
     var logo = document.getElementById('logo');
+    var projectsTitle = document.getElementById('projectsTitle');
 
     //AddEventListeners
-    listenEvent(logo, 'click', onLogoClick);
+    listenEvent(logo, 'click', scrollToTop);
+    listenEvent(projectsTitle, 'click', scrollToTop);
 
     //Initialize Functions
     initCopyright();
@@ -23,9 +25,9 @@ $(document).ready(function(){
     }
 
     //////////////////
-    ////ON LOGO CLICK
+    ////SCROLL TO TOP
     /////////////////
-    function onLogoClick(e)
+    function scrollToTop(e)
     {
         $('html:not(:animated), body:not(:animated)').animate( { scrollTop : "0px" }, 800, "easeOutExpo");
         e.preventDefault();

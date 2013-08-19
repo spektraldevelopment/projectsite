@@ -31,12 +31,12 @@ header h1 a {
 header h1 a:hover {
   color: #1695a3;
 }
-#projectsTitle {
+section header {
   width: 960px;
   margin: 20px auto;
   background-color: rgba(235, 127, 0, 0.95);
 }
-#projectsTitle h2 {
+section header h2 {
   position: relative;
   margin: 0;
   padding: 0;
@@ -47,6 +47,13 @@ header h1 a:hover {
   font-weight: 400;
   font-size: 40px;
   color: #ffffff;
+}
+section header h2 a {
+  text-decoration: none;
+  color: #ffffff;
+}
+section header h2 a:hover {
+  color: #225378;
 }
 section {
   position: relative;

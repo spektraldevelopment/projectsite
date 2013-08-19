@@ -1,5 +1,9 @@
 (function(){
 
+    //Vars
+
+    //AddEventListeners
+
     //Initialize Functions
     initCopyright();
 
@@ -13,5 +17,20 @@
        currentYear.innerHTML = copyString;
     }
 
+    $(document).ready(function() {
+        $('logo').click(function(){
+            $('html, body').animate({scrollTop : 0},800, done());
+            return false;
+        });
+        console.log( "ready!" );
+    });
+
+    function done()
+    {
+        console.log("Animation Complete");
+    }
+
     console.log('Init Spektral Projects');
 })();
+
+

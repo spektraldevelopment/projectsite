@@ -11,7 +11,19 @@ $(document).ready(function(){
 
     //Initialize Functions
     initCopyright();
-    scrollToElement(listItem);
+
+    if(listItem)
+    {
+        console.log("Hash Found: " + listItem);
+        scrollToElement(listItem);
+    }
+    else
+    {
+        //takes care of Chrome scroll position feature when
+        //user refreshes the page by hitting enter in the url field
+        scrollTo(0, 0);
+        console.log("No Hash Found!");
+    }
 
     //////////////////
     ////INIT COPYRIGHT
@@ -34,7 +46,7 @@ $(document).ready(function(){
         $('html:not(:animated), body:not(:animated)').animate( { scrollTop : "0px" }, 800, "easeOutExpo");
         e.preventDefault();
         return false;
-        console.log('logo Clicked!: ');
+        console.log('Scroll To Top');
     }
 
     //////////////////
@@ -44,34 +56,43 @@ $(document).ready(function(){
     {
         var topoffset = 138;
         var speed = 800;
+
         var destination = $( target ).offset().top - topoffset;
+
         jQuery( 'html:not(:animated), body:not(:animated)' ).animate( { scrollTop: destination}, speed, "easeOutExpo", function() {
             window.location.hash = target;
         });
         return false;
+
+        console.log('Scroll To Element');
     }
 
     //////////////////
     ////LISTEN EVENT
     /////////////////
-        function listenEvent(eventTarget, eventType, eventHandler)
+    function listenEvent(eventTarget, eventType, eventHandler)
+    {
+        if(eventTarget.addEventListener)
         {
-            if(eventTarget.addEventListener)
-            {
-                eventTarget.addEventListener(eventType, eventHandler, false)
-            }
-            else if(eventTarget.attachEvent)
-            {
-                eventType = "on" + eventType;
-                eventTarget.attachEvent(eventType, eventHandler)
-            }
-            else
-            {
-                eventTarget["on" + eventType] = eventHandler;
-            }
+            eventTarget.addEventListener(eventType, eventHandler, false)
         }
+        else if(eventTarget.attachEvent)
+        {
+            eventType = "on" + eventType;
+            eventTarget.attachEvent(eventType, eventHandler)
+        }
+        else
+        {
+            eventTarget["on" + eventType] = eventHandler;
+        }
+    }
 
-        console.log('Init Spektral Projects');
+    //Works just need to create itemArray to check all items
+//    $('#item3').waypoint(function() {
+//        console.log('You are looking at Item3');
+//    }, { offset: 138 });
+
+    console.log('Init Spektral Projects');
 });
 
 

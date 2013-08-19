@@ -1,0 +1,46 @@
+//////////////////////////////
+////SITE CONTENT
+//////////////////////////////
+
+{
+   "projects" : {
+   //------------
+        "project" : {
+         "title" : "Project One";
+         "thumb" : "../img/placeholder.jpg";
+         "desc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec mi consequat, volutpat massa sit amet, elementum elit. Etiam vitae ipsum accumsan, vestibulum lorem non, venenatis sem. Donec luctus libero laoreet rutrum cursus. Nunc sit amet augue non urna imperdiet elementum.";
+        }
+
+        "project" : {
+        "title" : "Project Two";
+        "thumb" : "../img/placeholder2.jpg";
+        "desc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec mi consequat, volutpat massa sit amet, elementum elit. Etiam vitae ipsum accumsan, vestibulum lorem non, venenatis sem. Donec luctus libero laoreet rutrum cursus. Nunc sit amet augue non urna imperdiet elementum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec mi consequat, volutpat massa sit amet, elementum elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec mi consequat, volutpat massa sit amet, elementum elit. Etiam vitae ipsum accumsan, vestibulum lorem non, venenatis sem. Donec luctus libero laoreet rutrum cursus. Nunc sit amet augue non urna imperdiet elementum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec mi consequat, volutpat massa sit amet, elementum elit.";
+        }
+
+        "project" : {
+        "title" : "Project Three";
+        "thumb" : "../img/placeholder.jpg";
+        "desc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec mi consequat, volutpat massa sit amet, elementum elit. Etiam vitae ipsum accumsan, vestibulum lorem non, venenatis sem. Donec luctus libero laoreet rutrum cursus. Nunc sit amet augue non urna imperdiet elementum.";
+        }
+
+        "project" : {
+        "title" : "Project Four";
+        "thumb" : "../img/placeholder2.jpg";
+        "desc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec mi consequat, volutpat massa sit amet, elementum elit. Etiam vitae ipsum accumsan, vestibulum lorem non, venenatis sem. Donec luctus libero laoreet rutrum cursus. Nunc sit amet augue non urna imperdiet elementum.";
+        }
+
+        "project" : {
+        "title" : "Project Five";
+        "thumb" : "../img/placeholder.jpg";
+        "desc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec mi consequat, volutpat massa sit amet, elementum elit. Etiam vitae ipsum accumsan, vestibulum lorem non, venenatis sem. Donec luctus libero laoreet rutrum cursus. Nunc sit amet augue non urna imperdiet elementum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec mi consequat, volutpat massa sit amet, elementum elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec mi consequat, volutpat massa sit amet, elementum elit. Etiam vitae ipsum accumsan, vestibulum lorem non, venenatis sem. Donec luctus libero laoreet rutrum cursus. Nunc sit amet augue non urna imperdiet elementum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec mi consequat, volutpat massa sit amet, elementum elit.";
+        }
+
+        "project" : {
+        "title" : "Project Six";
+        "thumb" : "../img/placeholder2.jpg";
+        "desc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec mi consequat, volutpat massa sit amet, elementum elit. Etiam vitae ipsum accumsan, vestibulum lorem non, venenatis sem. Donec luctus libero laoreet rutrum cursus. Nunc sit amet augue non urna imperdiet elementum.";
+        }
+
+   //------------
+   }
+}

@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
     //Vars
+    var listItem = window.location.hash;
     var logo = document.getElementById('logo');
     var projectsTitle = document.getElementById('projectsTitle');
 
@@ -10,6 +11,7 @@ $(document).ready(function(){
 
     //Initialize Functions
     initCopyright();
+    scrollToElement(listItem);
 
     //////////////////
     ////INIT COPYRIGHT
@@ -40,10 +42,10 @@ $(document).ready(function(){
     /////////////////
     function scrollToElement( target )
     {
-        var topoffset = 30;
+        var topoffset = 138;
         var speed = 800;
         var destination = jQuery( target ).offset().top - topoffset;
-        jQuery( 'html:not(:animated), body:not(:animated)' ).animate( { scrollTop: destination}, speed, function() {
+        jQuery( 'html:not(:animated), body:not(:animated)' ).animate( { scrollTop: destination}, speed, "easeOutExpo", function() {
             window.location.hash = target;
         });
         return false;

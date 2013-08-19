@@ -44,7 +44,7 @@ $(document).ready(function(){
     {
         var topoffset = 138;
         var speed = 800;
-        var destination = jQuery( target ).offset().top - topoffset;
+        var destination = $( target ).offset().top - topoffset;
         jQuery( 'html:not(:animated), body:not(:animated)' ).animate( { scrollTop: destination}, speed, "easeOutExpo", function() {
             window.location.hash = target;
         });

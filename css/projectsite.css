@@ -28,6 +28,9 @@ header h1 a {
   text-decoration: none;
   color: #ffffff;
 }
+header h1 a:hover {
+  color: #1695a3;
+}
 #projectsTitle {
   width: 960px;
   margin: 20px auto;
@@ -106,6 +109,9 @@ li a {
   text-decoration: none;
   background-color: #eb7f00;
 }
+li a:hover {
+  color: #225378;
+}
 footer {
   position: fixed;
   left: 0px;
@@ -124,6 +130,9 @@ footer {
   font-size: 12px;
   font-family: "myriad-pro", sans-serif;
   color: #ffffff;
+}
+#linkedIn:hover {
+  color: #1695a3;
 }
 footer small {
   position: relative;

@@ -141,6 +141,19 @@ footer {
 #linkedIn:hover {
   color: #1695a3;
 }
+#gitActivity {
+  position: relative;
+  margin: 2px 0px 0px 20px;
+  padding: 0;
+  float: left;
+  text-decoration: none;
+  font-size: 12px;
+  font-family: "myriad-pro", sans-serif;
+  color: #ffffff;
+}
+#gitActivity:hover {
+  color: #1695a3;
+}
 footer small {
   position: relative;
   margin: 2px 20px 0px 0px;

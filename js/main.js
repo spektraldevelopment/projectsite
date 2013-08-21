@@ -10,7 +10,9 @@ $(document).ready(function(){
     listenEvent(projectsTitle, 'click', scrollToTop);
 
     //Initialize Functions
+    parseJSON();
     initCopyright();
+    initGitActivity();
 
     if(listItem)
     {
@@ -26,6 +28,28 @@ $(document).ready(function(){
     }
 
     //////////////////
+    ////PARSE JSON
+    /////////////////
+    function parseJSON()
+    {
+        // Assign handlers immediately after making the request,
+        // and remember the jqxhr object for this request
+        var jqxhr = $.getJSON( "js/site.json", function() {
+            console.log( "success" );
+        })
+            .done(function() { console.log( "DATA: " + jqxhr ); })
+            .fail(function() { console.log( "error" ); })
+            .always(function() { console.log( "complete" ); });
+
+        // perform other work here ...
+
+        // Set another completion function for the request above
+        jqxhr.complete(function() { console.log( "second complete" ); });
+
+        console.log("Parse JSON");
+    }
+
+    //////////////////
     ////INIT COPYRIGHT
     /////////////////
     function initCopyright()
@@ -36,6 +60,20 @@ $(document).ready(function(){
        var currentYear = document.getElementById("copyright");
        var copyString = "Copyright &copy; " + y;
        currentYear.innerHTML = copyString;
+    }
+
+    //////////////////
+    ////INIT GIT ACTIVITY
+    /////////////////
+    function initGitActivity()
+    {
+        $('#gitActivity').FeedEk({
+            FeedUrl : 'https://github.com/spektraldevelopment.atom',
+            MaxCount : 1,
+            ShowDesc : false,
+            ShowPubDate:false,
+            DescCharacterLimit:100
+        });
     }
 
     //////////////////

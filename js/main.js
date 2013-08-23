@@ -5,6 +5,10 @@ $(document).ready(function(){
     var logo = document.getElementById('logo');
     var projectsTitle = document.getElementById('projectsTitle');
 
+    var projectArray = [];
+
+    var newProjectList;
+
     //AddEventListeners
     listenEvent(logo, 'click', scrollToTop);
     listenEvent(projectsTitle, 'click', scrollToTop);
@@ -34,12 +38,26 @@ $(document).ready(function(){
     {
         // Assign handlers immediately after making the request,
         // and remember the jqxhr object for this request
-        var jqxhr = $.getJSON( "js/site.json", function() {
+
+        var jqxhr = $.getJSON( "js/site.json", function(data)
+        {
+
+            $.each(data, function(key, val) {
+                projectArray = val;
+            });
+
+            clearDefaultList();
+            buildList();
+
             console.log( "success" );
         })
-            .done(function() { console.log( "DATA: " + jqxhr ); })
-            .fail(function() { console.log( "error" ); })
-            .always(function() { console.log( "complete" ); });
+        .done(function() { 'done' })
+        .fail(function( jqxhr, textStatus, error )
+        {
+            var err = textStatus + ', ' + error;
+            console.log( "Request Failed: " + err);
+        })
+        .always(function() { console.log( "complete" ); });
 
         // perform other work here ...
 
@@ -48,6 +66,74 @@ $(document).ready(function(){
 
         console.log("Parse JSON");
     }
+
+    //////////////////
+    ////CLEAR DEFAULT LIST
+    ////For non-js enabled browsers, we're going to provide a default hard coded list of projects.
+    ////If js is enable we're going to clear the default list and create a dynamic list built from JSON data
+    /////////////////
+    function clearDefaultList()
+    {
+        var listSection = document.getElementById('listSection');
+        var defaultList = document.getElementById('projectList');
+
+        listSection.removeChild(defaultList);
+
+        console.log("Clear default list");
+    }
+
+    //////////////////
+    ////BUILD LIST
+    ////If js is enabled we want to build a dynamic list via JSON data: js/site.json.
+    /////////////////
+    function buildList()
+    {
+        var listSection = document.getElementById('listSection');
+
+        var projectList = document.createElement('ul');
+        projectList.id = 'projectList';
+        listSection.appendChild(projectList);
+
+        newProjectList = projectList;
+
+        for(i = 0; i < projectArray.length; i++)
+        {
+            buildListItem(i, projectArray[i]);
+        }
+
+        console.log("Build List: " + projectArray.length);
+    }
+
+    //////////////////
+    ////BUILD LIST ITEM
+    /////////////////
+    function buildListItem(id, data)
+    {
+        var listItem = document.createElement('li');
+        listItem.id = (id + 1);
+        newProjectList.appendChild(listItem);
+
+        var title = document.createElement('h3');
+        title.innerHTML = data.title;
+
+        var image = document.createElement('img');
+        image.src = data.thumb;
+
+        var para = document.createElement('p');
+        para.innerHTML = data.desc;
+
+        var link = document.createElement('a');
+        link.href = data.url;
+        link.innerHTML = "GO";
+
+        listItem.appendChild(title);
+        listItem.appendChild(image);
+        listItem.appendChild(para);
+        listItem.appendChild(link);
+
+
+    }
+
 
     //////////////////
     ////INIT COPYRIGHT
@@ -68,7 +154,7 @@ $(document).ready(function(){
     function initGitActivity()
     {
         $('#gitActivity').FeedEk({
-            FeedUrl : 'https://github.com/spektraldevelopment.atom',
+            FeedUrl : 'https://github.com/spektraldevelopment.atom?=' + Math.random(),
             MaxCount : 1,
             ShowDesc : false,
             ShowPubDate:false,

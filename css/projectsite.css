@@ -5,6 +5,11 @@ html,
 body {
   background-color: #000;
 }
+a:hover,
+a:active,
+a:focus {
+  outline: 0;
+}
 header {
   position: fixed;
   width: 100%;

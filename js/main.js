@@ -5,7 +5,7 @@ $(document).ready(function(){
     var logo = document.getElementById('logo');
     var projectsTitle = document.getElementById('projectsTitle');
 
-    var projectArray = [];
+    var projectListArray = [];
 
     var newProjectList;
 
@@ -17,19 +17,6 @@ $(document).ready(function(){
     parseJSON();
     initCopyright();
     initGitActivity();
-
-    if(listItem)
-    {
-        console.log("Hash Found: " + listItem);
-        scrollToElement(listItem);
-    }
-    else
-    {
-        //takes care of Chrome scroll position feature when
-        //user refreshes the page by hitting enter in the url field
-        scrollTo(0, 0);
-        console.log("No Hash Found!");
-    }
 
     //////////////////
     ////PARSE JSON
@@ -43,11 +30,12 @@ $(document).ready(function(){
         {
 
             $.each(data, function(key, val) {
-                projectArray = val;
+                projectListArray = val;
             });
 
             clearDefaultList();
             buildList();
+            checkForHash();
 
             console.log( "success" );
         })
@@ -65,6 +53,37 @@ $(document).ready(function(){
         jqxhr.complete(function() { console.log( "second complete" ); });
 
         console.log("Parse JSON");
+    }
+
+    //////////////////
+    ////CHECK FOR HASH
+    //////////////////
+    function checkForHash()
+    {
+        if(listItem)
+        {
+            var projectHash;
+
+            for (i =0; i < projectListArray.length; i++)
+            {
+                projectHash = "#" + projectListArray[i].hash;
+
+                //Check if hashtag is valid
+                if(listItem === projectHash)
+                {
+                    console.log("Hash Found: " + listItem);
+                    scrollToElement(listItem);
+                }
+                else { console.log("Hash invalid!"); }
+            }
+        }
+        else
+        {
+            //takes care of Chrome scroll position feature when
+            //user refreshes the page by hitting enter in the url field
+            //scrollTo(0, 0);
+            console.log("No Hash Found!");
+        }
     }
 
     //////////////////
@@ -96,12 +115,12 @@ $(document).ready(function(){
 
         newProjectList = projectList;
 
-        for(i = 0; i < projectArray.length; i++)
+        for(i = 0; i < projectListArray.length; i++)
         {
-            buildListItem(i, projectArray[i]);
+            buildListItem(i, projectListArray[i]);
         }
 
-        console.log("Build List: " + projectArray.length);
+        console.log("Build List: " + projectListArray.length);
     }
 
     //////////////////
@@ -110,7 +129,7 @@ $(document).ready(function(){
     function buildListItem(id, data)
     {
         var listItem = document.createElement('li');
-        listItem.id = (id + 1);
+        listItem.id = data.hash;
         newProjectList.appendChild(listItem);
 
         var title = document.createElement('h3');
@@ -178,6 +197,8 @@ $(document).ready(function(){
     /////////////////
     function scrollToElement( target )
     {
+        console.log('Scroll To Element: ' + target);
+
         var topoffset = 138;
         var speed = 800;
 
@@ -188,7 +209,7 @@ $(document).ready(function(){
         });
         return false;
 
-        console.log('Scroll To Element');
+
     }
 
     //////////////////

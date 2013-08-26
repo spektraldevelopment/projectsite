@@ -191,6 +191,7 @@ $(document).ready(function(){
         jQuery( 'html:not(:animated), body:not(:animated)' ).animate( { scrollTop: destination}, speed, "easeOutExpo", function() {
             window.location.hash = target;
         });
+        target.preventDefault();
         return false;
     }
 

@@ -33,7 +33,6 @@ $(document).ready(function(){
                 projectListArray = val;
             });
 
-            clearDefaultList();
             buildList();
             checkForHash();
 
@@ -87,11 +86,9 @@ $(document).ready(function(){
     }
 
     //////////////////
-    ////CLEAR DEFAULT LIST
-    ////For non-js enabled browsers, we're going to provide a default hard coded list of projects.
-    ////If js is enable we're going to clear the default list and create a dynamic list built from JSON data
+    ////CLEAR LIST
     /////////////////
-    function clearDefaultList()
+    function clearList()
     {
         var listSection = document.getElementById('listSection');
         var defaultList = document.getElementById('projectList');
@@ -149,8 +146,6 @@ $(document).ready(function(){
         listItem.appendChild(image);
         listItem.appendChild(para);
         listItem.appendChild(link);
-
-
     }
 
 
@@ -197,19 +192,19 @@ $(document).ready(function(){
     /////////////////
     function scrollToElement( target )
     {
-        console.log('Scroll To Element: ' + target);
+        console.log('SCROLL TO ELEMENT: ' + target);
 
         var topoffset = 138;
         var speed = 800;
 
-        var destination = $( target ).offset().top - topoffset;
-
-        jQuery( 'html:not(:animated), body:not(:animated)' ).animate( { scrollTop: destination}, speed, "easeOutExpo", function() {
-            window.location.hash = target;
-        });
-        return false;
-
-
+//        var destination = $( target ).offset().top - topoffset;
+//
+//        console.log("Destination: " + destination);
+//
+//        jQuery( 'html:not(:animated), body:not(:animated)' ).animate( { scrollTop: destination}, speed, "easeOutExpo", function() {
+//            window.location.hash = target;
+//        });
+//        return false;
     }
 
     //////////////////

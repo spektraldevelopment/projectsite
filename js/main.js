@@ -86,19 +86,6 @@ $(document).ready(function(){
     }
 
     //////////////////
-    ////CLEAR LIST
-    /////////////////
-    function clearList()
-    {
-        var listSection = document.getElementById('listSection');
-        var defaultList = document.getElementById('projectList');
-
-        listSection.removeChild(defaultList);
-
-        console.log("Clear default list");
-    }
-
-    //////////////////
     ////BUILD LIST
     ////If js is enabled we want to build a dynamic list via JSON data: js/site.json.
     /////////////////

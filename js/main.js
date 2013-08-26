@@ -34,7 +34,6 @@ $(document).ready(function(){
             });
 
             buildList();
-            checkForHash();
 
             console.log( "success" );
         })
@@ -104,6 +103,8 @@ $(document).ready(function(){
             buildListItem(i, projectListArray[i]);
         }
 
+        checkForHash();
+
         console.log("Build List: " + projectListArray.length);
     }
 
@@ -169,9 +170,6 @@ $(document).ready(function(){
     function scrollToTop()
     {
         scrollToElement('#' + projectListArray[0].hash);
-//        $('html:not(:animated), body:not(:animated)').animate( { scrollTop : "0px" }, 800, "easeOutExpo");
-//        e.preventDefault();
-//        return false;
         console.log('Scroll To Top');
     }
 
@@ -189,10 +187,7 @@ $(document).ready(function(){
 
         $("html, body").scrollTo( target, speed, { easing:'easeOutExpo', offset:{ top:-(topoffset)} } );
 
-//        jQuery( 'html:not(:animated), body:not(:animated)' ).animate( { scrollTop: destination}, speed, "easeOutExpo", function() {
-//            ///window.location.hash = target;
-//            console.log("Scroll complete!");
-//        });
+//        e.preventDefault();
 //        return false;
     }
 

@@ -184,14 +184,14 @@ $(document).ready(function(){
         var topoffset = 138;
         var speed = 800;
 
-//        var destination = $( target ).offset().top - topoffset;
-//
-//        console.log("Destination: " + destination);
-//
-//        jQuery( 'html:not(:animated), body:not(:animated)' ).animate( { scrollTop: destination}, speed, "easeOutExpo", function() {
-//            window.location.hash = target;
-//        });
-//        return false;
+        var destination = $( target ).offset().top - topoffset;
+
+        console.log("Destination: " + destination);
+
+        jQuery( 'html:not(:animated), body:not(:animated)' ).animate( { scrollTop: destination}, speed, "easeOutExpo", function() {
+            window.location.hash = target;
+        });
+        return false;
     }
 
     //////////////////

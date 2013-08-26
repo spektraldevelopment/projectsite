@@ -189,9 +189,9 @@ $(document).ready(function(){
         console.log("Destination: " + destination);
 
         jQuery( 'html:not(:animated), body:not(:animated)' ).animate( { scrollTop: destination}, speed, "easeOutExpo", function() {
-            window.location.hash = target;
+            ///window.location.hash = target;
+            console.log("Scroll complete!");
         });
-        target.preventDefault();
         return false;
     }
 

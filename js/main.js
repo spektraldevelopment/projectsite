@@ -101,9 +101,9 @@ $(document).ready(function(){
             console.log("Hash Change: " + location.hash);
 
             //Not sure if these are needed.
-//            e.preventDefault();
-//            e.returnValue = false;
-//            return false;
+            e.preventDefault();
+            e.returnValue = false;
+            return false;
         })
     }
 

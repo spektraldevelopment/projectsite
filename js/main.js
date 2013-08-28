@@ -9,9 +9,12 @@ $(document).ready(function(){
 
     var newProjectList;
 
+    var newBodyY = 0;
+
     //AddEventListeners
     listenEvent(logo, 'click', scrollToTop);
     listenEvent(projectsTitle, 'click', scrollToTop);
+
 
     //Initialize Functions
     parseJSON();
@@ -60,9 +63,14 @@ $(document).ready(function(){
     {
         if(listItem)
         {
+//            if(history.pushState)
+//            {
+//                history.pushState(null, null, listItem);
+//            }
+
             var projectHash;
 
-            for (i =0; i < projectListArray.length; i++)
+            for (var i =0; i < projectListArray.length; i++)
             {
                 projectHash = "#" + projectListArray[i].hash;
 
@@ -77,11 +85,26 @@ $(document).ready(function(){
         }
         else
         {
-            //takes care of Chrome scroll position feature when
-            //user refreshes the page by hitting enter in the url field
-            //scrollTo(0, 0);
             console.log("No Hash Found!");
         }
+        //Detects a hash change in order to
+        //prevent
+        $(window).hashchange( function(e)
+        {
+            //This prevents the element from jumping to top by default
+            window.scrollTo(0, newBodyY);
+
+            var hash = window.location.hash.substring(1);
+            var newTag = document.getElementById(hash);
+
+            scrollToElement(newTag);
+            console.log("Hash Change: " + location.hash);
+
+            //Not sure if these are needed.
+//            e.preventDefault();
+//            e.returnValue = false;
+//            return false;
+        })
     }
 
     //////////////////
@@ -98,7 +121,7 @@ $(document).ready(function(){
 
         newProjectList = projectList;
 
-        for(i = 0; i < projectListArray.length; i++)
+        for(var i = 0; i < projectListArray.length; i++)
         {
             buildListItem(i, projectListArray[i]);
         }
@@ -181,14 +204,17 @@ $(document).ready(function(){
         console.log('SCROLL TO ELEMENT: ' + target);
 
         var topoffset = 138;
-        var speed = 800;
+        var speed = 1000;//800
 
-        var destination = $( target ).offset().top - topoffset;
+        //var destination = $( target ).offset().top - topoffset;
 
-        $("html, body").scrollTo( target, speed, { easing:'easeOutExpo', offset:{ top:-(topoffset)} } );
+        $("html, body").scrollTo( target, speed, { easing:'easeOutExpo', offset:{ top:-(topoffset)}, onAfter:scrollComplete } );
+        return false;
+    }
 
-//        e.preventDefault();
-//        return false;
+    function scrollComplete()
+    {
+        newBodyY = document.body.scrollTop;
     }
 
     //////////////////

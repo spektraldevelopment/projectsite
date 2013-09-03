@@ -5,11 +5,14 @@ $(document).ready(function(){
     var logo = document.getElementById('logo');
     var projectsTitle = document.getElementById('projectsTitle');
 
-    var projectListArray = [];
+    var projectDataArray = [];
+    var itemArray = [];
 
     var newProjectList;
 
     var newBodyY = 0;
+
+    var listTopOffset = 138;
 
     //AddEventListeners
     listenEvent(logo, 'click', scrollToTop);
@@ -33,7 +36,7 @@ $(document).ready(function(){
         {
 
             $.each(data, function(key, val) {
-                projectListArray = val;
+                projectDataArray = val;
             });
 
             buildList();
@@ -70,9 +73,9 @@ $(document).ready(function(){
 
             var projectHash;
 
-            for (var i =0; i < projectListArray.length; i++)
+            for (var i =0; i < projectDataArray.length; i++)
             {
-                projectHash = "#" + projectListArray[i].hash;
+                projectHash = "#" + projectDataArray[i].hash;
 
                 //Check if hashtag is valid
                 if(listItem === projectHash)
@@ -100,7 +103,7 @@ $(document).ready(function(){
             scrollToElement(newTag);
             console.log("Hash Change: " + location.hash);
 
-            //Not sure if these are needed.
+            //Not sure if these are needed. Will determine at a later date.
 //            e.preventDefault();
 //            e.returnValue = false;
 //            return false;
@@ -121,14 +124,15 @@ $(document).ready(function(){
 
         newProjectList = projectList;
 
-        for(var i = 0; i < projectListArray.length; i++)
+        for(var i = 0; i < projectDataArray.length; i++)
         {
-            buildListItem(i, projectListArray[i]);
+            buildListItem(i, projectDataArray[i]);
         }
 
         checkForHash();
+        setWayPoints();
 
-        console.log("Build List: " + projectListArray.length);
+        console.log("Build List: " + projectDataArray.length);
     }
 
     //////////////////
@@ -157,6 +161,8 @@ $(document).ready(function(){
         listItem.appendChild(image);
         listItem.appendChild(para);
         listItem.appendChild(link);
+
+        itemArray.push(listItem);
     }
 
 
@@ -192,7 +198,7 @@ $(document).ready(function(){
     /////////////////
     function scrollToTop()
     {
-        scrollToElement('#' + projectListArray[0].hash);
+        scrollToElement('#' + projectDataArray[0].hash);
         console.log('Scroll To Top');
     }
 
@@ -203,11 +209,11 @@ $(document).ready(function(){
     {
         console.log('SCROLL TO ELEMENT: ' + target);
 
-        var topoffset = 138;
+        var topoffset = listTopOffset;
         var speed = 1000;//800
 
         //var destination = $( target ).offset().top - topoffset;
-
+        //Maybe introduce two easing types 1) For initial load 2) for changing hash tags
         $("html, body").scrollTo( target, speed, { easing:'easeOutExpo', offset:{ top:-(topoffset)}, onAfter:scrollComplete } );
         return false;
     }
@@ -237,11 +243,27 @@ $(document).ready(function(){
         }
     }
 
-    //Works just need to create itemArray to check all items
-//    $('#item3').waypoint(function() {
-//        console.log('You are looking at Item3');
-//    }, { offset: 138 });
+    function setWayPoints()
+    {
+        for (var i = 0; i < itemArray.length; i++)
+        {
+            //$(itemArray[i]).waypoint(checkForItem, { offset: function() { return -$(this).height() + listTopOffset } });
+            $(itemArray[i]).waypoint(checkForItem);
+        }
+    }
 
+    function checkForItem(e)
+    {
+        if(e === "down")
+        {
+            TweenLite.to(this, .5, { opacity: 0});
+        }
+        else
+        {
+            TweenLite.to(this, .5, { opacity: 1});
+        }
+        //console.log("Waypoint Hit: " + e + " ID: " + this.id + " TOP: " + $(this).offset().top);
+    }
     console.log('Init Spektral Projects');
 });
 

@@ -90,15 +90,23 @@ $(document).ready(function(){
         {
             console.log("No Hash Found!");
         }
+
+        var currentHashY = $(listItem).position().top - listTopOffset;
+        console.log("CurrentY: " + currentHashY);
         //Detects a hash change in order to
         //prevent
         $(window).hashchange( function(e)
         {
             //This prevents the element from jumping to top by default
-            //window.scrollTo(0, newBodyY);
+            //var newHashY = $(location.hash).position().top - listTopOffset;
+           // console.log("NEW HASH Y: " + newHashY);
+
+            window.scrollTo(0, currentHashY);
 
             var hash = window.location.hash.substring(1);
             var newTag = document.getElementById(hash);
+
+            currentHashY = $(newTag).position().top - listTopOffset;
 
             scrollToElement(newTag);
             console.log("Hash Change: " + location.hash);
@@ -129,8 +137,8 @@ $(document).ready(function(){
             buildListItem(i, projectDataArray[i]);
         }
 
-        checkForHash();
         setWayPoints();
+        checkForHash();
 
         console.log("Build List: " + projectDataArray.length);
     }
@@ -209,7 +217,7 @@ $(document).ready(function(){
     {
         var itemPos = $(target).position().top - listTopOffset;
 
-        TweenLite.to(window, 1, {scrollTo:{y:itemPos}, ease: Expo.easeOut});
+        TweenLite.to(window, 1.5, {scrollTo:{y:itemPos}, ease: Expo.easeOut});
 
         return false;
     }

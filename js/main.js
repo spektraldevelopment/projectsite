@@ -95,7 +95,7 @@ $(document).ready(function(){
         $(window).hashchange( function(e)
         {
             //This prevents the element from jumping to top by default
-            window.scrollTo(0, newBodyY);
+            //window.scrollTo(0, newBodyY);
 
             var hash = window.location.hash.substring(1);
             var newTag = document.getElementById(hash);
@@ -104,9 +104,9 @@ $(document).ready(function(){
             console.log("Hash Change: " + location.hash);
 
             //Not sure if these are needed. Will determine at a later date.
-//            e.preventDefault();
-//            e.returnValue = false;
-//            return false;
+            e.preventDefault();
+            e.returnValue = false;
+            return false;
         })
     }
 
@@ -196,10 +196,10 @@ $(document).ready(function(){
     //////////////////
     ////SCROLL TO TOP
     /////////////////
-    function scrollToTop()
+    function scrollToTop(e)
     {
         scrollToElement('#' + projectDataArray[0].hash);
-        console.log('Scroll To Top');
+        e.preventDefault();
     }
 
     //////////////////
@@ -207,14 +207,10 @@ $(document).ready(function(){
     /////////////////
     function scrollToElement( target )
     {
-        console.log('SCROLL TO ELEMENT: ' + target);
+        var itemPos = $(target).position().top - listTopOffset;
 
-        var topoffset = listTopOffset;
-        var speed = 1000;//800
+        TweenLite.to(window, 1, {scrollTo:{y:itemPos}, ease: Expo.easeOut});
 
-        //var destination = $( target ).offset().top - topoffset;
-        //Maybe introduce two easing types 1) For initial load 2) for changing hash tags
-        $("html, body").scrollTo( target, speed, { easing:'easeOutExpo', offset:{ top:-(topoffset)}, onAfter:scrollComplete } );
         return false;
     }
 

@@ -1,5 +1,16 @@
 $(document).ready(function(){
 
+    //Self executing function that stops default url bar behaviour when dealing with hash tags
+    ( function( $ ) {
+        $( 'a[href="#"]' ).click( function(e) {
+            e.preventDefault();
+        } );
+
+        $(window).hashchange( function(e) {
+            e.preventDefault();
+        } );
+    } )( jQuery );
+
     //Vars
     var listItem = window.location.hash;
     var logo = document.getElementById('logo');
@@ -91,8 +102,18 @@ $(document).ready(function(){
             console.log("No Hash Found!");
         }
 
-        var currentHashY = $(listItem).position().top - listTopOffset;
-        console.log("CurrentY: " + currentHashY);
+        var currentHashY = 0;
+
+        try
+        {
+            currentHashY = $(listItem).position().top - listTopOffset;
+            console.log("CurrentY: " + currentHashY);
+        } catch(err)
+        {
+            console.log("currentHashY not set yet.");
+        }
+
+
         //Detects a hash change in order to
         //prevent
         $(window).hashchange( function(e)
@@ -112,9 +133,9 @@ $(document).ready(function(){
             console.log("Hash Change: " + location.hash);
 
             //Not sure if these are needed. Will determine at a later date.
-            e.preventDefault();
-            e.returnValue = false;
-            return false;
+           // e.preventDefault();
+           //e.returnValue = false;
+            //return false;
         })
     }
 
@@ -154,21 +175,25 @@ $(document).ready(function(){
 
         var title = document.createElement('h3');
         title.innerHTML = data.title;
+        listItem.appendChild(title);
 
         var image = document.createElement('img');
         image.src = data.thumb;
+        listItem.appendChild(image);
 
         var para = document.createElement('p');
         para.innerHTML = data.desc;
+        listItem.appendChild(para);
 
         var link = document.createElement('a');
         link.href = data.url;
         link.innerHTML = "GO";
-
-        listItem.appendChild(title);
-        listItem.appendChild(image);
-        listItem.appendChild(para);
         listItem.appendChild(link);
+
+        if(id === 0)
+        {
+           link.setAttribute("style", "visibility: hidden");
+        }
 
         itemArray.push(listItem);
     }
@@ -207,7 +232,7 @@ $(document).ready(function(){
     function scrollToTop(e)
     {
         scrollToElement('#' + projectDataArray[0].hash);
-        e.preventDefault();
+        //e.preventDefault();
     }
 
     //////////////////

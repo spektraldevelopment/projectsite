@@ -1,3 +1,16 @@
+$(document).ready(function(){
+
+    //Self executing function that stops default url bar behaviour when dealing with hash tags
+    ( function( $ ) {
+        $( 'a[href="#"]' ).click( function(e) {
+            e.preventDefault();
+        } );
+
+        $(window).hashchange( function(e) {
+            e.preventDefault();
+        } );
+    } )( jQuery );
+
     //Vars
     var listItem = window.location.hash;
     var logo = document.getElementById('logo');
@@ -14,9 +27,17 @@
 
     var currentHistoryState;
 
+    var glowTween;
+
     //AddEventListeners
-    listenEvent(logo, 'click', scrollToTop);
-    listenEvent(projectsTitle, 'click', scrollToTop);
+    attachEventListener(logo, 'click', scrollToTop);
+    attachEventListener(projectsTitle, 'click', scrollToTop);
+
+    attachEventListener(logo, 'mouseover', highlightText);
+    attachEventListener(projectsTitle, 'mouseover', highlightText);
+
+    attachEventListener(logo, 'mouseout', removeTextGlow);
+    attachEventListener(projectsTitle, 'mouseout', removeTextGlow);
 
     //Initialize Functions
     //getHistoryState(true);
@@ -128,7 +149,7 @@
         //getHistoryState();
         item = item || null;
 
-        var stateTitle = item.childNodes[0].innerHTML;
+        var stateTitle = "It's Spektral Development!";//item.childNodes[0].innerHTML
         var stateUrl = "#" + item.id;
 
         console.log("Update History: stateTitle: " + stateTitle + " stateURL: " + stateUrl);
@@ -187,6 +208,9 @@
         link.href = data.url;
         link.innerHTML = "GO";
         listItem.appendChild(link);
+
+        attachEventListener(link, 'mouseover', highlightLink);
+        attachEventListener(link, 'mouseout', removeHighlight);
 
         if(id === 0)
         {
@@ -263,13 +287,50 @@
 
     function scrollComplete(item)
     {
-        updateHistory(item);
+        //updateHistory(item);
     }
 
     //////////////////
-    ////LISTEN EVENT
+    ////HIGHLIGHT TEXT
     /////////////////
-    function listenEvent(eventTarget, eventType, eventHandler)
+    function highlightText()
+    {
+        glowTween = TweenLite.to(this, .2, {
+            textShadow:"2px 2px 15px rgba(255, 255, 255, 1)"
+        });
+    }
+
+    //////////////////
+    ////REMOVE TEXT GLOW
+    /////////////////
+    function removeTextGlow()
+    {
+        glowTween.reverse();
+    }
+
+    //////////////////////
+    ////HIGHLIGHT LINK
+    //////////////////////
+    function highlightLink()
+    {
+        glowTween = TweenLite.to(this, .2, {
+            boxShadow: "0px 0px 25px 2px rgba(235, 127, 0, 1)",
+            backgroundColor:"#eb7f00"
+        });
+    }
+
+    /////////////////////
+    ////REMOVE HIGHLIGHT
+    /////////////////////
+    function removeHighlight()
+    {
+        glowTween.reverse();
+    }
+
+    //////////////////
+    ////ATTACH EVENT LISTENER
+    /////////////////
+    function attachEventListener(eventTarget, eventType, eventHandler)
     {
         if(eventTarget.addEventListener)
         {
@@ -308,7 +369,7 @@
         //console.log("Waypoint Hit: " + e + " ID: " + this.id + " TOP: " + $(this).offset().top);
     }
     console.log('Init Spektral Projects');
-
+});
 
 
 

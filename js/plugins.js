@@ -68,52 +68,16 @@
                 dataType: "json",
                 success: function (data)
                 {
-
                     $("#" + id).empty();
                     var s = "";
-                    $.each(data.responseData.feed.entries, function (e, item)
-                    {
-                        s += item.title + " @ " + item.publishedDate;
-//                        console.log(JSON.stringify(item));
 
-                          //I was trying to display the commit message but decided to move on to some more important.
-
-//                        console.log(item.content);
-//
-//                        var content = $.parseHTML(item.content);
-//
-//                        var blockOfInterest = $.parseHTML(content[7].innerHTML);
-//
-//                        for(i = 0; i < blockOfInterest.length; i++)
-//                        {
-//                            console.log("blockOfInterest: " + i + ": " + blockOfInterest[i].innerHTML);
-//
-//                        }
-
-//                        console.log("AHAHAHAHHA: " + content.length);
-
-//                        var element = document.getElementById("div1");
-//                        element.appendChild(para);
-
-                          //This is part of the origninal plugin, but I'm not using it at the moment.
-//                        if (def.ShowPubDate)
-//                        {
-//                            i = new Date(item.publishedDate);
-//                            s += '<div class="itemDate">' + i.toLocaleDateString() + "</div>";
-//                        }
-//                        if (def.ShowDesc)
-//                        {
-//                            if (def.DescCharacterLimit > 0 && item.content.length > def.DescCharacterLimit)
-//                            {
-//                                s += '<div class="itemContent">' + item.content.substr(0, def.DescCharacterLimit) + "...</div>";
-//                            }
-//                            else
-//                            {
-//                                s += '<div class="itemContent">' + item.content + "</div>";
-//                            }
-//                        }con
-                    });
-                    $("#" + id).append('GitHub Activity: ' + s);
+                    try {
+                        $.each(data.responseData.feed.entries, function (e, item)
+                        {
+                            s += item.title + " @ " + item.publishedDate;
+                        });
+                        $("#" + id).append('GitHub Activity: ' + s);
+                    } catch(e) {console.log("Couldn't fetch Github activity");}
                 ////////////////////////////////////////////////
                 }
             });

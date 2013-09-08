@@ -1,16 +1,3 @@
-$(document).ready(function(){
-
-    //Self executing function that stops default url bar behaviour when dealing with hash tags
-    ( function( $ ) {
-        $( 'a[href="#"]' ).click( function(e) {
-            e.preventDefault();
-        } );
-
-        $(window).hashchange( function(e) {
-            e.preventDefault();
-        } );
-    } )( jQuery );
-
     //Vars
     var listItem = window.location.hash;
     var logo = document.getElementById('logo');
@@ -25,47 +12,44 @@ $(document).ready(function(){
 
     var listTopOffset = 138;
 
+    var currentHistoryState;
+
     //AddEventListeners
     listenEvent(logo, 'click', scrollToTop);
     listenEvent(projectsTitle, 'click', scrollToTop);
 
-
     //Initialize Functions
+    //getHistoryState(true);
     parseJSON();
     initCopyright();
     initGitActivity();
+
+    //////////////////
+    ////GET HISTORY STATE
+    //////////////////
+    function getHistoryState(firstTime)
+    {
+        firstTime = firstTime || false;
+
+        var currentHistoryState = History.getState();
+        if(firstTime)
+        {
+            History.log('Initial History State:', currentHistoryState.data, currentHistoryState.title, currentHistoryState.url);
+        } else {
+            History.log('Current History State:', currentHistoryState.data, currentHistoryState.title, currentHistoryState.url);
+        }
+    }
 
     //////////////////
     ////PARSE JSON
     /////////////////
     function parseJSON()
     {
-        // Assign handlers immediately after making the request,
-        // and remember the jqxhr object for this request
+        $.each(jsonFile, function(key, val) {
+            projectDataArray = val;
+        });
 
-        var jqxhr = $.getJSON( "js/site.json", function(data)
-        {
-
-            $.each(data, function(key, val) {
-                projectDataArray = val;
-            });
-
-            buildList();
-
-            console.log( "success" );
-        })
-        .done(function() { 'done' })
-        .fail(function( jqxhr, textStatus, error )
-        {
-            var err = textStatus + ', ' + error;
-            console.log( "Request Failed: " + err);
-        })
-        .always(function() { console.log( "complete" ); });
-
-        // perform other work here ...
-
-        // Set another completion function for the request above
-        jqxhr.complete(function() { console.log( "second complete" ); });
+        buildList();
 
         console.log("Parse JSON");
     }
@@ -77,11 +61,6 @@ $(document).ready(function(){
     {
         if(listItem)
         {
-//            if(history.pushState)
-//            {
-//                history.pushState(null, null, listItem);
-//            }
-
             var projectHash;
 
             for (var i =0; i < projectDataArray.length; i++)
@@ -122,7 +101,7 @@ $(document).ready(function(){
             //var newHashY = $(location.hash).position().top - listTopOffset;
            // console.log("NEW HASH Y: " + newHashY);
 
-            window.scrollTo(0, currentHashY);
+            window.scrollTo(0, currentHashY);//Do I still need this?
 
             var hash = window.location.hash.substring(1);
             var newTag = document.getElementById(hash);
@@ -133,10 +112,29 @@ $(document).ready(function(){
             console.log("Hash Change: " + location.hash);
 
             //Not sure if these are needed. Will determine at a later date.
-           // e.preventDefault();
+            e.preventDefault();
            //e.returnValue = false;
-            //return false;
+            return false;
         })
+    }
+
+    //////////////////
+    /////UPDATE HISTORY
+    /////Updates browser history so if you hit back it scrolls to the previous project
+    /////This could be annoying for some users, but I'm going to try it out anyway.
+    /////////////////
+    function updateHistory(item)
+    {
+        //getHistoryState();
+        item = item || null;
+
+        var stateTitle = item.childNodes[0].innerHTML;
+        var stateUrl = "#" + item.id;
+
+        console.log("Update History: stateTitle: " + stateTitle + " stateURL: " + stateUrl);
+        //pushState(data, title, url)
+        History.pushState(null , stateTitle, stateUrl);
+        getHistoryState();
     }
 
     //////////////////
@@ -217,6 +215,8 @@ $(document).ready(function(){
     /////////////////
     function initGitActivity()
     {
+        try
+        {
         $('#gitActivity').FeedEk({
             FeedUrl : 'https://github.com/spektraldevelopment.atom?=' + Math.random(),
             MaxCount : 1,
@@ -224,6 +224,7 @@ $(document).ready(function(){
             ShowPubDate:false,
             DescCharacterLimit:100
         });
+        } catch (e) {}
     }
 
     //////////////////
@@ -232,7 +233,6 @@ $(document).ready(function(){
     function scrollToTop(e)
     {
         scrollToElement('#' + projectDataArray[0].hash);
-        //e.preventDefault();
     }
 
     //////////////////
@@ -240,16 +240,30 @@ $(document).ready(function(){
     /////////////////
     function scrollToElement( target )
     {
-        var itemPos = $(target).position().top - listTopOffset;
+        var docState;
 
-        TweenLite.to(window, 1.5, {scrollTo:{y:itemPos}, ease: Expo.easeOut});
+        checkDocReady();
+
+        function checkDocReady()
+        {
+            docState = document.readyState;
+            console.log("checkDocReady: " + docState);
+
+            if(docState !== 'complete')
+            {
+                setTimeout(checkDocReady, 100)
+            } else {
+                var itemPos = $(target).position().top - listTopOffset;
+                TweenLite.to(window, 1.5, {scrollTo:{y:itemPos}, ease: Expo.easeOut, onComplete: scrollComplete, onCompleteParams:[target]});
+            }
+        }
 
         return false;
     }
 
-    function scrollComplete()
+    function scrollComplete(item)
     {
-        newBodyY = document.body.scrollTop;
+        updateHistory(item);
     }
 
     //////////////////
@@ -294,7 +308,6 @@ $(document).ready(function(){
         //console.log("Waypoint Hit: " + e + " ID: " + this.id + " TOP: " + $(this).offset().top);
     }
     console.log('Init Spektral Projects');
-});
 
 
 

@@ -96,23 +96,85 @@
         </footer>
         <!-- Site end -->
 
-        <!-- Scripts -->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-        <script src="js/vendor/less-1.4.1.min.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/TweenLite.min.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/easing/EasePack.min.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/plugins/CSSPlugin.min.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/plugins/ScrollToPlugin.min.js"></script>
+        <script src="js/vendor/preloadjs-NEXt.min.js"></script>
+        <script src="js/vendor/jquery-1.10.2.min.js"></script>
         <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
+        <script>
+            //GLOBAL
+            var jsonFile;
+            $(document).ready(function(){
+
+                //Self executing function that stops default url bar behaviour when dealing with hash tags
+                ( function( $ ) {
+                    $( 'a[href="#"]' ).click( function(e) {
+                        e.preventDefault();
+                    } );
+
+                    $(window).hashchange( function(e) {
+                        e.preventDefault();
+                    } );
+                } )( jQuery );
+
+                //Preload all needed scripts
+                var preloader = new createjs.LoadQueue(true, "js/");
+
+                preloader.addEventListener("error", onLoadError)
+                preloader.addEventListener("fileload", onFileLoaded);
+                preloader.addEventListener("complete", onLoadComplete);
+
+                preloader.loadFile({id: "JSON", src: "site.json"});
+                preloader.loadFile({id: "JavaScript", src:"vendor/native.history.js"});
+                preloader.loadFile({id: "JavaScript", src:"vendor/less-1.4.1.min.js"});
+                preloader.loadFile({id: "JavaScript", src:"vendor/greensock/TweenLite.min.js"});
+                preloader.loadFile({id: "JavaScript", src:"vendor/greensock/easing/EasePack.min.js"});
+                preloader.loadFile({id: "JavaScript", src:"vendor/greensock/plugins/CSSPlugin.min.js"});
+                preloader.loadFile({id: "JavaScript", src:"vendor/greensock/plugins/ScrollToPlugin.min.js"});
+                preloader.loadFile({id: "JavaScript", src:"main.js"});
+
+                preloader.load();
+
+                function onLoadError(e)
+                {
+                    console.log("Load Error!: " + e)
+                }
+
+                function onFileLoaded(e)
+                {
+                    var item = e.item; // A reference to the item that was passed in
+                    var type = item.type;
+
+                    switch (type)
+                    {
+                        case createjs.LoadQueue.CSS:
+                            //(document.head || document.getElementsByTagName("head")[0]).appendChild(result);
+                            break;
+
+                        case createjs.LoadQueue.JAVASCRIPT:
+                            document.body.appendChild(e.result);
+                            break;
+
+                        case createjs.LoadQueue.JSON:
+                            jsonFile = e.result;
+                            console.log("JSON!")
+                            break;
+                    }
+                   // console.log("File Loaded! Item: " + item + " Type: " + type);
+                }
+
+                function onLoadComplete(e)
+                {
+                    console.log("Load Complete!: " + e);
+                }
+
+            });
+        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src='//www.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
+        <!--<script>-->
+            <!--var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];-->
+            <!--(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];-->
+            <!--g.src='//www.google-analytics.com/ga.js';-->
+            <!--s.parentNode.insertBefore(g,s)}(document,'script'));-->
+        <!--</script>-->
     </body>
 </html>

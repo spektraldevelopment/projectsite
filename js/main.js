@@ -139,6 +139,35 @@ $(document).ready(function(){
         })
     }
 
+    ////////////////////
+    ////SET LIST HEIGHT
+    ////////////////////
+    function setListHeight()
+    {
+        //var listHeight = getViewportHeight();
+        //console.log("List Height: " + listHeight);
+        var currentListHeight = $('#projectList').height();
+        var itemY = $('#projectList li:last-child').position().top;
+        var itemHeight = $('#projectList li:last-child').height();
+        var itemBottomY = itemY + itemHeight;
+        var bodyHeight = $('body').height();
+        var viewportHeight = getViewportHeight();
+
+        console.log(
+            "Current List Height: " + currentListHeight
+          + " itemBottomY: " + itemBottomY
+          + " bodyHeight: " + bodyHeight
+          + " viewport Height: " + viewportHeight
+          + " itemY: " + itemY
+          + " itemHeight: " + itemHeight);
+
+        //Calculate the new list height in order to scroll the last item to the proper spot.
+        console.log("(viewportHeight - listTopOffset): " + (viewportHeight - listTopOffset));
+        var newListHeight = (bodyHeight + viewportHeight) - 458;//458 is the magic number, I'm still trying to figure this out
+        //console.log("New List HEight: " + newListHeight);
+        projectList.setAttribute("style", "height:" + newListHeight + "px");
+    }
+
     //////////////////
     /////UPDATE HISTORY
     /////Updates browser history so if you hit back it scrolls to the previous project
@@ -177,15 +206,9 @@ $(document).ready(function(){
             buildListItem(i, projectDataArray[i]);
         }
 
-        setWayPoints();
+       // setWayPoints();
         checkForHash();
-
-        $('.infinite-container').waypoint('infinite');
-
-        //var listHeight = projectList.scrollHeight + getViewportHeight();
-        //console.log("List Height: " + listHeight);
-
-        //projectList.setAttribute("style", "padding-bottom:" + listHeight + "px");
+        setListHeight();
 
         console.log("Build List: " + projectDataArray.length);
     }
@@ -197,7 +220,6 @@ $(document).ready(function(){
     {
         var listItem = document.createElement('li');
         listItem.id = data.hash;
-        listItem.className = 'infinite-item';
         newProjectList.appendChild(listItem);
 
         var title = document.createElement('h3');

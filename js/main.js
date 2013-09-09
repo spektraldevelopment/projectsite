@@ -168,7 +168,6 @@ $(document).ready(function(){
 
         var projectList = document.createElement('ul');//
         projectList.id = 'projectList';
-        projectList.className = 'infinite-container';
         listSection.appendChild(projectList);
 
         newProjectList = projectList;

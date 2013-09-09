@@ -63,7 +63,9 @@ section {
   z-index: 0;
   background-color: #000000;
 }
-#projectList {
+.infinite-container {
+  overflow: hidden;
+  position: relative;
   list-style-type: none;
   width: 960px;
   height: 100%;
@@ -71,7 +73,7 @@ section {
   padding: 0;
   background-color: #225378;
 }
-li {
+.infinite-item {
   border: 1px solid #ffffff;
   margin: 0px 0px 20px 0px;
   overflow: hidden;

@@ -166,8 +166,9 @@ $(document).ready(function(){
     {
         var listSection = document.getElementById('listSection');
 
-        var projectList = document.createElement('ul');
+        var projectList = document.createElement('ul');//
         projectList.id = 'projectList';
+        projectList.className = 'infinite-container';
         listSection.appendChild(projectList);
 
         newProjectList = projectList;
@@ -180,6 +181,13 @@ $(document).ready(function(){
         setWayPoints();
         checkForHash();
 
+        $('.infinite-container').waypoint('infinite');
+
+        //var listHeight = projectList.scrollHeight + getViewportHeight();
+        //console.log("List Height: " + listHeight);
+
+        //projectList.setAttribute("style", "padding-bottom:" + listHeight + "px");
+
         console.log("Build List: " + projectDataArray.length);
     }
 
@@ -190,6 +198,7 @@ $(document).ready(function(){
     {
         var listItem = document.createElement('li');
         listItem.id = data.hash;
+        listItem.className = 'infinite-item';
         newProjectList.appendChild(listItem);
 
         var title = document.createElement('h3');
@@ -347,6 +356,9 @@ $(document).ready(function(){
         }
     }
 
+    /////////////////////
+    ////SET WAY POINTS
+    /////////////////////
     function setWayPoints()
     {
         for (var i = 0; i < itemArray.length; i++)
@@ -356,6 +368,9 @@ $(document).ready(function(){
         }
     }
 
+    ///////////////////////////////////
+    ////CHECK FOR ITEM
+    ///////////////////////////////////
     function checkForItem(e)
     {
         if(e === "down")
@@ -368,6 +383,26 @@ $(document).ready(function(){
         }
         //console.log("Waypoint Hit: " + e + " ID: " + this.id + " TOP: " + $(this).offset().top);
     }
+
+    ////////////////////////////
+    ////GET VIEWPORT HEIGHT
+    ////////////////////////////
+    function getViewportHeight()
+    {
+        if (window.innerHeight)
+        {
+            return window.innerHeight;
+        }
+        else if (document.body && document.body.offsetHeight)
+        {
+            return document.body.offsetHeight;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
     console.log('Init Spektral Projects');
 });
 

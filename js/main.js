@@ -206,7 +206,7 @@ $(document).ready(function(){
             buildListItem(i, projectDataArray[i]);
         }
 
-       // setWayPoints();
+        setWayPoints();
         checkForHash();
         setListHeight();
 

@@ -153,19 +153,28 @@ $(document).ready(function(){
         var bodyHeight = $('body').height();
         var viewportHeight = getViewportHeight();
 
-        console.log(
-            "Current List Height: " + currentListHeight
-          + " itemBottomY: " + itemBottomY
-          + " bodyHeight: " + bodyHeight
-          + " viewport Height: " + viewportHeight
-          + " itemY: " + itemY
-          + " itemHeight: " + itemHeight);
+//        console.log(
+//            "Current List Height: " + currentListHeight
+//          + " itemBottomY: " + itemBottomY
+//          + " bodyHeight: " + bodyHeight
+//          + " viewport Height: " + viewportHeight
+//          + " itemY: " + itemY
+//          + " itemHeight: " + itemHeight);
 
         //Calculate the new list height in order to scroll the last item to the proper spot.
         console.log("(viewportHeight - listTopOffset): " + (viewportHeight - listTopOffset));
-        var newListHeight = (bodyHeight + viewportHeight) - 458;//458 is the magic number, I'm still trying to figure this out
-        //console.log("New List HEight: " + newListHeight);
+
+        var newListHeight = (bodyHeight + viewportHeight) - (320 + listTopOffset);
         projectList.setAttribute("style", "height:" + newListHeight + "px");
+    }
+
+    //////////////////
+    /////ON WINDOW RESIZE
+    //////////////////
+    function onWindowResize()
+    {
+        //console.log("Window resize!!!");
+        //setTimeout(setListHeight, 100);//Doesn't work because setListHeight gets current body height - will fix
     }
 
     //////////////////
@@ -206,9 +215,11 @@ $(document).ready(function(){
             buildListItem(i, projectDataArray[i]);
         }
 
-        setWayPoints();
+       // setWayPoints();
         checkForHash();
         setListHeight();
+
+        attachEventListener(window, "resize", onWindowResize);
 
         console.log("Build List: " + projectDataArray.length);
     }

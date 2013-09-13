@@ -21,9 +21,7 @@ $(document).ready(function(){
 
     var newProjectList;
 
-    var newBodyY = 0;
-
-    var listTopOffset = 138;
+    var listTopOffset = 140;
 
     var currentHistoryState;
 
@@ -113,16 +111,11 @@ $(document).ready(function(){
             console.log("currentHashY not set yet.");
         }
 
-
         //Detects a hash change in order to
         //prevent
         $(window).hashchange( function(e)
         {
-            //This prevents the element from jumping to top by default
-            //var newHashY = $(location.hash).position().top - listTopOffset;
-           // console.log("NEW HASH Y: " + newHashY);
-
-            window.scrollTo(0, currentHashY);//Do I still need this?
+            window.scrollTo(0, currentHashY);//Prevents element from jumping to top
 
             var hash = window.location.hash.substring(1);
             var newTag = document.getElementById(hash);
@@ -132,9 +125,7 @@ $(document).ready(function(){
             scrollToElement(newTag);
             console.log("Hash Change: " + location.hash);
 
-            //Not sure if these are needed. Will determine at a later date.
             e.preventDefault();
-           //e.returnValue = false;
             return false;
         })
     }
@@ -144,8 +135,6 @@ $(document).ready(function(){
     ////////////////////
     function setListHeight()
     {
-        //var listHeight = getViewportHeight();
-        //console.log("List Height: " + listHeight);
         var currentListHeight = $('#projectList').height();
         var itemY = $('#projectList li:last-child').position().top;
         var itemHeight = $('#projectList li:last-child').height();
@@ -153,18 +142,15 @@ $(document).ready(function(){
         var bodyHeight = $('body').height();
         var viewportHeight = getViewportHeight();
 
-//        console.log(
-//            "Current List Height: " + currentListHeight
-//          + " itemBottomY: " + itemBottomY
-//          + " bodyHeight: " + bodyHeight
-//          + " viewport Height: " + viewportHeight
-//          + " itemY: " + itemY
-//          + " itemHeight: " + itemHeight);
+        console.log(
+            "Current List Height: " + currentListHeight
+          + " itemBottomY: " + itemBottomY
+          + " bodyHeight: " + bodyHeight
+          + " viewport Height: " + viewportHeight
+          + " itemY: " + itemY
+          + " itemHeight: " + itemHeight);
 
-        //Calculate the new list height in order to scroll the last item to the proper spot.
-        console.log("(viewportHeight - listTopOffset): " + (viewportHeight - listTopOffset));
-
-        var newListHeight = (bodyHeight + viewportHeight) - (320 + listTopOffset);
+        var newListHeight = currentListHeight + (viewportHeight - (listTopOffset + itemHeight + 20));
         projectList.setAttribute("style", "height:" + newListHeight + "px");
     }
 
@@ -215,9 +201,9 @@ $(document).ready(function(){
             buildListItem(i, projectDataArray[i]);
         }
 
-       // setWayPoints();
+        setWayPoints();
         checkForHash();
-        setListHeight();
+        $(window).load(setListHeight());
 
         attachEventListener(window, "resize", onWindowResize);
 

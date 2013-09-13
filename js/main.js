@@ -137,20 +137,19 @@ $(document).ready(function(){
     {
         var currentListHeight = $('#projectList').height();
         var itemY = $('#projectList li:last-child').position().top;
-        var itemHeight = $('#projectList li:last-child').height();
-        var itemBottomY = itemY + itemHeight;
-        var bodyHeight = $('body').height();
+        var itemHeight = $('#projectList li:last-child').outerHeight();
+        var itemMargin = parseInt($('#projectList li:last-child').css('margin-bottom'), 10);
         var viewportHeight = getViewportHeight();
 
-        console.log(
-            "Current List Height: " + currentListHeight
-          + " itemBottomY: " + itemBottomY
-          + " bodyHeight: " + bodyHeight
-          + " viewport Height: " + viewportHeight
-          + " itemY: " + itemY
-          + " itemHeight: " + itemHeight);
+//        console.log(
+//            "Current List Height: " + currentListHeight
+//          + " itemBottomY: " + itemBottomY
+//          + " bodyHeight: " + bodyHeight
+//          + " viewport Height: " + viewportHeight
+//          + " itemY: " + itemY
+//          + " itemHeight: " + itemHeight);
 
-        var newListHeight = currentListHeight + (viewportHeight - (listTopOffset + itemHeight + 20));
+        var newListHeight = currentListHeight + (viewportHeight - (listTopOffset + (itemHeight + itemMargin)));
         projectList.setAttribute("style", "height:" + newListHeight + "px");
     }
 

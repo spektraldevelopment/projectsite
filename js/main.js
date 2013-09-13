@@ -23,6 +23,8 @@ $(document).ready(function(){
 
     var listTopOffset = 140;
 
+    var newListHeight;
+
     var currentHistoryState;
 
     var glowTween;
@@ -136,7 +138,6 @@ $(document).ready(function(){
     function setListHeight()
     {
         var currentListHeight = $('#projectList').height();
-        var itemY = $('#projectList li:last-child').position().top;
         var itemHeight = $('#projectList li:last-child').outerHeight();
         var itemMargin = parseInt($('#projectList li:last-child').css('margin-bottom'), 10);
         var viewportHeight = getViewportHeight();
@@ -149,8 +150,26 @@ $(document).ready(function(){
 //          + " itemY: " + itemY
 //          + " itemHeight: " + itemHeight);
 
-        var newListHeight = currentListHeight + (viewportHeight - (listTopOffset + (itemHeight + itemMargin)));
+        newListHeight = currentListHeight + (viewportHeight - (listTopOffset + (itemHeight + itemMargin)));
         projectList.setAttribute("style", "height:" + newListHeight + "px");
+
+        //Check if window gets resized
+        attachEventListener(window, "resize", onWindowResize);
+    }
+
+    ////////////////////
+    ////RESET LIST HEIGHT
+    ///////////////////
+    function resetListHeight()
+    {
+        //The item height and item margin don't change so I might make them a global var and set them once
+        //To save processor time
+        var itemHeight = $('#projectList li:last-child').outerHeight();
+        var itemMargin = parseInt($('#projectList li:last-child').css('margin-bottom'), 10);
+        var viewportHeight = getViewportHeight();
+
+        var adjustedListHeight = newListHeight + (viewportHeight - (listTopOffset + (itemHeight + itemMargin)));
+        projectList.setAttribute("style", "height:" + adjustedListHeight + "px");
     }
 
     //////////////////
@@ -158,8 +177,7 @@ $(document).ready(function(){
     //////////////////
     function onWindowResize()
     {
-        //console.log("Window resize!!!");
-        //setTimeout(setListHeight, 100);//Doesn't work because setListHeight gets current body height - will fix
+        resetListHeight();
     }
 
     //////////////////
@@ -203,8 +221,6 @@ $(document).ready(function(){
         setWayPoints();
         checkForHash();
         $(window).load(setListHeight());
-
-        attachEventListener(window, "resize", onWindowResize);
 
         console.log("Build List: " + projectDataArray.length);
     }

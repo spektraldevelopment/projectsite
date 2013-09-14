@@ -25,8 +25,6 @@ $(document).ready(function(){
 
     var newListHeight;
 
-    var currentHistoryState;
-
     var glowTween;
 
     //AddEventListeners
@@ -40,26 +38,9 @@ $(document).ready(function(){
     attachEventListener(projectsTitle, 'mouseout', removeTextGlow);
 
     //Initialize Functions
-    //getHistoryState(true);
     parseJSON();
     initCopyright();
     initGitActivity();
-
-    //////////////////
-    ////GET HISTORY STATE
-    //////////////////
-    function getHistoryState(firstTime)
-    {
-        firstTime = firstTime || false;
-
-        var currentHistoryState = History.getState();
-        if(firstTime)
-        {
-            History.log('Initial History State:', currentHistoryState.data, currentHistoryState.title, currentHistoryState.url);
-        } else {
-            History.log('Current History State:', currentHistoryState.data, currentHistoryState.title, currentHistoryState.url);
-        }
-    }
 
     //////////////////
     ////PARSE JSON
@@ -125,6 +106,7 @@ $(document).ready(function(){
             currentHashY = $(newTag).position().top - listTopOffset;
 
             scrollToElement(newTag);
+
             console.log("Hash Change: " + location.hash);
 
             e.preventDefault();
@@ -137,9 +119,12 @@ $(document).ready(function(){
     ////////////////////
     function setListHeight()
     {
+
+        var lastItem = $('#projectList li:last-child');
+
         var currentListHeight = $('#projectList').height();
-        var itemHeight = $('#projectList li:last-child').outerHeight();
-        var itemMargin = parseInt($('#projectList li:last-child').css('margin-bottom'), 10);
+        var itemHeight = lastItem.outerHeight();
+        var itemMargin = parseInt(lastItem.css('margin-bottom'), 10);
         var viewportHeight = getViewportHeight();
 
 //        console.log(
@@ -178,25 +163,6 @@ $(document).ready(function(){
     function onWindowResize()
     {
         resetListHeight();
-    }
-
-    //////////////////
-    /////UPDATE HISTORY
-    /////Updates browser history so if you hit back it scrolls to the previous project
-    /////This could be annoying for some users, but I'm going to try it out anyway.
-    /////////////////
-    function updateHistory(item)
-    {
-        //getHistoryState();
-        item = item || null;
-
-        var stateTitle = "It's Spektral Development!";//item.childNodes[0].innerHTML
-        var stateUrl = "#" + item.id;
-
-        console.log("Update History: stateTitle: " + stateTitle + " stateURL: " + stateUrl);
-        //pushState(data, title, url)
-        History.pushState(null , stateTitle, stateUrl);
-        getHistoryState();
     }
 
     //////////////////
@@ -240,6 +206,7 @@ $(document).ready(function(){
 
         var image = document.createElement('img');
         image.src = data.thumb;
+        image.setAttribute("alt", data.title);
         listItem.appendChild(image);
 
         var para = document.createElement('p');
@@ -329,7 +296,7 @@ $(document).ready(function(){
 
     function scrollComplete(item)
     {
-        //updateHistory(item);
+       //Just keeping this just in case
     }
 
     //////////////////
@@ -396,8 +363,8 @@ $(document).ready(function(){
     {
         for (var i = 0; i < itemArray.length; i++)
         {
-            //$(itemArray[i]).waypoint(checkForItem, { offset: function() { return -$(this).height() + listTopOffset } });
-            $(itemArray[i]).waypoint(checkForItem);
+            var item = $(itemArray[i]);
+            item.waypoint(checkForItem);
         }
     }
 

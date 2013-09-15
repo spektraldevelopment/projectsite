@@ -16,14 +16,10 @@
 ////DEVICES
 /////////////////////////
 @variance: 16px;
-@tabletLandscape: 1024px;
-@tabletLandscapeMax: (@tabletLandscape + @variance);
-@tabletPortrait: 768px;
-@tabletPortraitMax: (@tabletPortrait + @variance);
-@phoneLandscape: 480px;
-@phoneLandscapeMax: (@phoneLandscape + @variance);
-@phonePortrait: 320px;
-@phonePortraitMax: (@phonePortrait + @variance);
+@tabletLandscape: (1024px + @variance);
+@tabletPortrait: (768px + @variance);
+@phoneLandscape: (480px + @variance);
+@phonePortrait: (320px + @variance);
 
 ///////////////////////////
 //Fonts
@@ -244,7 +240,7 @@ footer small {
 ///////////////////////////////////////////
 
 //Tablet - Landscape - 1024 x 768
-@media all and (max-width: @tabletLandscapeMax) and (min-width: @tabletLandscape) {
+@media all and (max-width: @tabletLandscape) {
 
   section {
     width: 860px;
@@ -261,7 +257,7 @@ footer small {
 }
 
 //Tablet - Portrait - 768 x 1024
-@media all and (max-width: @tabletPortraitMax) and (min-width: @tabletPortrait) {
+@media all and (max-width: @tabletLandscape) and (min-width: @tabletPortrait) {
   #ghBadge {
     display:none;
   }
@@ -281,7 +277,7 @@ footer small {
 }
 
 //Smartphone - Landscape - 480 x 320
-@media all and (max-width: @phoneLandscapeMax) and (min-width: @phoneLandscape) {
+@media all and (max-width: @tabletPortrait) and (min-width: @phoneLandscape) {
   #ghBadge {
     display:none;
   }
@@ -347,7 +343,7 @@ footer small {
 }
 
 //Smartphone - Portrait - 320 x 480
-@media all and (max-width: @phonePortraitMax) and (min-width: @phonePortrait) {
+@media all and (max-width: @phoneLandscape) and (min-width: @phonePortrait) {
   #ghBadge {
     display:none;
   }

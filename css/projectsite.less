@@ -42,7 +42,7 @@
 ///////////////////////////
 html,
 body {
-  background-color: #fff;
+  background-color: @black;
 }
 
 a:hover, a:active, a:focus {
@@ -125,7 +125,7 @@ section {
 }
 
 li {
-  border:1px solid #ffffff;
+  border:2px solid rgba(red(@white), green(@white), blue(@white), 0.1);
   margin: 0px 0px 20px 0px;
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.1);
@@ -312,7 +312,13 @@ footer small {
   }
 
   li {
+    margin: 0px 0px 25px 0px;
     padding: 10px 0 10px;
+  }
+
+  //Make the element more button like for touch screens
+  li:active {
+    border:2px solid rgba(red(@white), green(@white), blue(@white), 0.5);
   }
 
   li h3 {
@@ -382,8 +388,14 @@ footer small {
     margin: 50px 0;
   }
 
+  //Make the element more button like for touch screens
   li {
+    margin: 0px 0px 25px 0px;
     padding: 10px 0 10px;
+  }
+
+  li:active {
+    border:2px solid rgba(red(@white), green(@white), blue(@white), 0.5);
   }
 
   li h3 {

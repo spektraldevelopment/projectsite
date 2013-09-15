@@ -11,20 +11,102 @@
         <meta name="keywords" content="HTML5, html, Javascript, JS, CSS, developer, toronto, freelance, spektral, development, spektraldevelopment, dave, boyle, git, github, front-end, front, end">
         <meta name="viewport" content="width=device-width">
 
+        <script src="js/vendor/head.min.js"></script>
+
         <!--Typekit-->
-        <!--local-->
-        <script type="text/javascript" src="//use.typekit.net/dvh0kvo.js"></script>
-        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-        <!--production-->
-        <script type="text/javascript" src="//use.typekit.net/fbk8llc.js"></script>
-        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+        <script type="text/javascript">
+            (function() {
+                var host = window.location.hostname;
+                var typekitID;
+
+                if(host === "localhost")
+                {
+                    typekitID = 'dvh0kvo';
+                    console.log("localhost!");
+                } else {
+                    typekitID = 'fbk8llc';
+                    console.log("spektraldevelopment.com!");
+                }
+
+                var config = {
+                    kitId: typekitID,
+                    scriptTimeout: 3000
+                };
+                var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/(\s|^)wf-loading(\s|$)/g," ");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script"),d=false;tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(d||a&&a!="complete"&&a!="loaded")return;d=true;clearTimeout(t);try{Typekit.load(config)}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
+            })();
+        </script>
 
         <!--CSS-->
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" type="text/css" href="css/projectsite.css" />
-        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 
+        <script>
+            head.js("js/vendor/modernizr-2.6.2.min.js",
+                    "js/vendor/preloadjs-NEXT.min.js",
+                    function(){console.log("Intial scripts loaded!")});
+
+            head.ready(preloadSite);
+
+            function preloadSite()
+            {
+                //GLOBAL
+                var jsonFile;
+
+                //Preload all needed scripts
+                var preloader = new createjs.LoadQueue(false, "js/");
+
+                preloader.addEventListener("error", onLoadError)
+                preloader.addEventListener("fileload", onFileLoaded);
+                preloader.addEventListener("complete", onLoadComplete);
+
+                preloader.loadFile({id: "JSON", src: "site.json"});
+                preloader.loadFile({id: "JavaScript", src:"vendor/jquery-1.10.2.min.js"});
+                preloader.loadFile({id: "JavaScript", src:"vendor/native.history.js"});
+                preloader.loadFile({id: "JavaScript", src:"vendor/less-1.4.1.min.js"});
+                preloader.loadFile({id: "JavaScript", src:"vendor/greensock/TweenLite.min.js"});
+                preloader.loadFile({id: "JavaScript", src:"vendor/greensock/easing/EasePack.min.js"});
+                preloader.loadFile({id: "JavaScript", src:"vendor/greensock/plugins/CSSPlugin.min.js"});
+                preloader.loadFile({id: "JavaScript", src:"vendor/greensock/plugins/ScrollToPlugin.min.js"});
+                preloader.loadFile({id: "JavaScript", src:"plugins.js"});
+                preloader.loadFile({id: "JavaScript", src:"main.js"});
+
+                preloader.load();
+            }
+
+            function onLoadError(e)
+            {
+                console.log("Load Error!: " + e)
+            }
+
+            function onFileLoaded(e)
+            {
+                var item = e.item; // A reference to the item that was passed in
+                var type = item.type;
+
+                switch (type)
+                {
+                    case createjs.LoadQueue.CSS:
+                        //(document.head || document.getElementsByTagName("head")[0]).appendChild(result);
+                        break;
+
+                    case createjs.LoadQueue.JAVASCRIPT:
+                        document.body.appendChild(e.result);
+                        break;
+
+                    case createjs.LoadQueue.JSON:
+                        jsonFile = e.result;
+                        console.log("JSON!: http://www.youtube.com/watch?v=cp3LFwFdPf8")
+                        break;
+                }
+                // console.log("File Loaded! Item: " + item + " Type: " + type);
+            }
+
+            function onLoadComplete(e)
+            {
+                console.log("Load Complete!: " + e);
+            }
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -97,64 +179,6 @@
             <small id="copyright">Copyright &copy; 2013</small>
         </footer>
         <!-- Site end -->
-
-        <script src="js/vendor/preloadjs-NEXT.min.js"></script>
-        <script>
-            //GLOBAL
-            var jsonFile;
-            //Preload all needed scripts
-            var preloader = new createjs.LoadQueue(false, "js/");
-
-            preloader.addEventListener("error", onLoadError)
-            preloader.addEventListener("fileload", onFileLoaded);
-            preloader.addEventListener("complete", onLoadComplete);
-
-            preloader.loadFile({id: "JSON", src: "site.json"});
-            preloader.loadFile({id: "JavaScript", src:"vendor/jquery-1.10.2.min.js"});
-            preloader.loadFile({id: "JavaScript", src:"vendor/native.history.js"});
-            preloader.loadFile({id: "JavaScript", src:"vendor/less-1.4.1.min.js"});
-            preloader.loadFile({id: "JavaScript", src:"vendor/greensock/TweenLite.min.js"});
-            preloader.loadFile({id: "JavaScript", src:"vendor/greensock/easing/EasePack.min.js"});
-            preloader.loadFile({id: "JavaScript", src:"vendor/greensock/plugins/CSSPlugin.min.js"});
-            preloader.loadFile({id: "JavaScript", src:"vendor/greensock/plugins/ScrollToPlugin.min.js"});
-            preloader.loadFile({id: "JavaScript", src:"plugins.js"});
-            preloader.loadFile({id: "JavaScript", src:"main.js"});
-
-            preloader.load();
-
-            function onLoadError(e)
-            {
-                console.log("Load Error!: " + e)
-            }
-
-            function onFileLoaded(e)
-            {
-                var item = e.item; // A reference to the item that was passed in
-                var type = item.type;
-
-                switch (type)
-                {
-                    case createjs.LoadQueue.CSS:
-                        //(document.head || document.getElementsByTagName("head")[0]).appendChild(result);
-                        break;
-
-                    case createjs.LoadQueue.JAVASCRIPT:
-                        document.body.appendChild(e.result);
-                        break;
-
-                    case createjs.LoadQueue.JSON:
-                        jsonFile = e.result;
-                        console.log("JSON!: http://www.youtube.com/watch?v=cp3LFwFdPf8")
-                        break;
-                }
-               // console.log("File Loaded! Item: " + item + " Type: " + type);
-            }
-
-            function onLoadComplete(e)
-            {
-                console.log("Load Complete!: " + e);
-            }
-        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <!--<script>-->

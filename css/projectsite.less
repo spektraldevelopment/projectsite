@@ -71,6 +71,22 @@ header h1 {
   font-size: 40px;
   font-family: @header;
   color: @white;
+  //visibility: hidden;
+}
+
+//Hides/shows text that is using typekit once font is loaded
+.wf-loading h1 {
+  visibility: hidden;
+}
+.wf-active h1 {
+  visibility: visible;
+}
+
+.wf-loading h2 {
+  visibility: hidden;
+}
+.wf-active h2 {
+  visibility: visible;
 }
 
 header h1 a {
@@ -125,7 +141,7 @@ section {
 }
 
 li {
-  border:2px solid rgba(red(@white), green(@white), blue(@white), 0.1);
+  border:2px solid rgba(red(@white), green(@white), blue(@white), 0);
   margin: 0px 0px 20px 0px;
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.1);
@@ -143,7 +159,7 @@ li h3 {
 li img {
   width: 100px;
   height: 50px;
-  border: 1px solid #fff;
+  border: 2px solid rgba(red(@white), green(@white), blue(@white), 0.75);
   margin: 20px 20px 0px 20px;
   padding: 0;
   float: left;

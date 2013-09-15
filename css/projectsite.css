@@ -185,7 +185,7 @@ footer small {
     width: 860px;
   }
 }
-@media all and (max-width: 1040px) and (min-width: 784px) {
+@media all and (max-width: 784px) {
   #ghBadge {
     display: none;
   }
@@ -200,7 +200,7 @@ footer small {
     width: 600px;
   }
 }
-@media all and (max-width: 784px) and (min-width: 496px) {
+@media all and (max-width: 496px) {
   #ghBadge {
     display: none;
   }
@@ -251,7 +251,7 @@ footer small {
     margin: 18px 20px 0px 0px;
   }
 }
-@media all and (max-width: 496px) and (min-width: 336px) {
+@media all and (max-width: 336px) {
   #ghBadge {
     display: none;
   }

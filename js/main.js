@@ -204,12 +204,6 @@ $(document).ready(function(){
         listItem.id = data.hash;
         newProjectList.appendChild(listItem);
 
-        if(VIEWPORT_WIDTH <= 480)//Smartphone
-        {
-            console.log("Smartphone!");
-            //Make list item a huge button that links to site
-        }
-
         var title = document.createElement('h3');
         title.innerHTML = data.title;
         listItem.appendChild(title);
@@ -436,6 +430,12 @@ $(document).ready(function(){
     {
         VIEWPORT_WIDTH = getViewportWidth();
         VIEWPORT_HEIGHT = getViewportHeight();
+
+        if(VIEWPORT_WIDTH <= 496)//Smartphone - 480 + 16 for scroll
+        {
+            listTopOffset = 120;//Distance from top to bottom of last listItem
+        }
+
         console.log("Viewport: Width: " + VIEWPORT_WIDTH + " Height: " + VIEWPORT_HEIGHT);
     }
 

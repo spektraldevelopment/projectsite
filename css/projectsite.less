@@ -13,13 +13,22 @@
 @orange: #eb7f00;
 
 //////////////////////////
-////DEVICES
+////DEVICE WIDTHS FOR MEDIA QUERIES
 /////////////////////////
 @variance: 16px;
 @tabletLandscape: (1024px + @variance);
 @tabletPortrait: (768px + @variance);
 @phoneLandscape: (480px + @variance);
 @phonePortrait: (320px + @variance);
+
+/////////////////////////
+////LIST WIDTH
+/////////////////////////
+@defaultWidth: 960px;
+@tabLandWidth: 860px;
+@tabPortWidth: 600px;
+@phoneLandWidth: 100%;//480
+@phonePortWidth: 100%;//320
 
 ///////////////////////////
 //Fonts
@@ -70,7 +79,7 @@ header h1 a {
 }
 
 section header {
-  width:960px;
+  width:@defaultWidth;//960px
   margin: 20px auto;
   background-color: rgba(red(@orange), green(@orange), blue(@orange), .95);
 }
@@ -99,7 +108,7 @@ section header h2 a {
 section {
   position: relative;
   overflow:auto;
-  width: 960px;//960px
+  width: @defaultWidth;//960px
   margin: 0 auto;
   padding: 50px 50px 0px;//50
   z-index: 0;
@@ -108,7 +117,7 @@ section {
 
 #projectList {
   list-style-type: none;
-  width:960px;
+  width: @defaultWidth;//960px
   height:100%;
   margin: 90px auto 0px;
   padding: 0;
@@ -243,16 +252,16 @@ footer small {
 @media all and (max-width: @tabletLandscape) {
 
   section {
-    width: 860px;
+    width: @tabLandWidth;//860px
   }
 
   section header {
-    width:860px;
+    width: @tabLandWidth;//860px
     margin: 20px auto;
   }
 
   #projectList {
-    width: 860px;
+    width: @tabLandWidth;//860px
   }
 }
 
@@ -263,16 +272,16 @@ footer small {
   }
 
   section {
-    width: 600px;
+    width: @tabPortWidth;//600px
   }
 
   section header {
-    width:600px;
+    width: @tabPortWidth;//600px
     margin: 20px auto;
   }
 
   #projectList {
-    width: 600px;
+    width: @tabPortWidth;//600px
   }
 }
 
@@ -283,7 +292,7 @@ footer small {
   }
 
   section {
-    width: 480px;
+    width: @phoneLandWidth;//480px
     margin: 0;
     padding: 0;
   }
@@ -293,7 +302,7 @@ footer small {
   }
 
   #projectList {
-    width: 480px;
+    width: @phoneLandWidth;//480px
     margin: 50px 0;
   }
 
@@ -349,7 +358,7 @@ footer small {
   }
 
   section {
-    width: 480px;
+    width: @phonePortWidth;//320
     margin: 0;
     padding: 0;
   }
@@ -359,7 +368,7 @@ footer small {
   }
 
   #projectList {
-    width: 480px;
+    width: @phonePortWidth;//320
     margin: 50px 0;
   }
 

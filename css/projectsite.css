@@ -150,6 +150,20 @@ footer {
 #gitActivity:hover {
   color: #1695a3;
 }
+#gitHubLink {
+  display: none;
+  position: relative;
+  margin: 2px 0px 0px 20px;
+  padding: 0;
+  float: left;
+  text-decoration: none;
+  font-size: 12px;
+  font-family: "myriad-pro", sans-serif;
+  color: #ffffff;
+}
+#gitHubLink:hover {
+  color: #1695a3;
+}
 footer small {
   position: relative;
   margin: 2px 20px 0px 0px;
@@ -203,7 +217,7 @@ footer small {
     margin: 50px 0;
   }
   li {
-    padding: 0;
+    padding: 10px 0 10px;
   }
   li h3 {
     text-align: center;
@@ -218,7 +232,73 @@ footer small {
   li a {
     display: none;
   }
+  #linkedIn {
+    font-size: 24px;
+    margin: 6px 0px 0px 20px;
+  }
+  #gitActivity {
+    display: none;
+  }
+  #gitHubLink {
+    display: inline;
+    font-size: 24px;
+    margin: 6px 0px 0px 20px;
+  }
+  footer {
+    height: 40px;
+  }
+  footer small {
+    margin: 18px 20px 0px 0px;
+  }
 }
 @media all and (max-width: 320px) {
-  
+  #ghBadge {
+    display: none;
+  }
+  section {
+    width: 480px;
+    margin: 0;
+    padding: 0;
+  }
+  section header {
+    display: none;
+  }
+  #projectList {
+    width: 480px;
+    margin: 50px 0;
+  }
+  li {
+    padding: 10px 0 10px;
+  }
+  li h3 {
+    text-align: center;
+    padding: 5px 0px 0px 9px;
+  }
+  li p {
+    display: none;
+  }
+  li img {
+    display: none;
+  }
+  li a {
+    display: none;
+  }
+  #linkedIn {
+    font-size: 24px;
+    margin: 6px 0px 0px 20px;
+  }
+  #gitActivity {
+    display: none;
+  }
+  #gitHubLink {
+    display: inline;
+    font-size: 24px;
+    margin: 6px 0px 0px 20px;
+  }
+  footer {
+    height: 40px;
+  }
+  footer small {
+    margin: 18px 20px 0px 0px;
+  }
 }

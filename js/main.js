@@ -27,6 +27,9 @@ $(document).ready(function(){
 
     var glowTween;
 
+    var VIEWPORT_WIDTH;
+    var VIEWPORT_HEIGHT;
+
     //AddEventListeners
     attachEventListener(logo, 'click', scrollToTop);
     attachEventListener(projectsTitle, 'click', scrollToTop);
@@ -38,10 +41,10 @@ $(document).ready(function(){
     attachEventListener(projectsTitle, 'mouseout', removeTextGlow);
 
     //Initialize Functions
+    getViewportDimensions();
     parseJSON();
     initCopyright();
     initGitActivity();
-    logViewportDimensions();
 
     //////////////////
     ////PARSE JSON
@@ -200,6 +203,12 @@ $(document).ready(function(){
         var listItem = document.createElement('li');
         listItem.id = data.hash;
         newProjectList.appendChild(listItem);
+
+        if(VIEWPORT_WIDTH <= 480)//Smartphone
+        {
+            console.log("Smartphone!");
+            //Make list item a huge button that links to site
+        }
 
         var title = document.createElement('h3');
         title.innerHTML = data.title;
@@ -423,9 +432,11 @@ $(document).ready(function(){
         }
     }
 
-    function logViewportDimensions()
+    function getViewportDimensions()
     {
-        console.log("Viewport: Width: " + getViewportWidth() + " Height: " + getViewportHeight());
+        VIEWPORT_WIDTH = getViewportWidth();
+        VIEWPORT_HEIGHT = getViewportHeight();
+        console.log("Viewport: Width: " + VIEWPORT_WIDTH + " Height: " + VIEWPORT_HEIGHT);
     }
 
     console.log('Init Spektral Projects');

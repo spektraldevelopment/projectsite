@@ -24,7 +24,7 @@
 ///////////////////////////
 html,
 body {
-  background-color: #000;
+  background-color: #fff;
 }
 
 a:hover, a:active, a:focus {
@@ -60,14 +60,6 @@ header h1 a {
   color: @white;
 }
 
-//header h1 a:hover {
-//  color: @med-blue;
-//}
-
-//header h1 a:focus {
-//  color: @white;
-//}
-
 section header {
   width:960px;
   margin: 20px auto;
@@ -92,17 +84,13 @@ section header h2 a {
   color: @white;
 }
 
-//section header h2 a:hover {
-//  color: @dark-blue;
-//}
-
 ///////////////////////////
 //Content Styling
 ///////////////////////////
 section {
   position: relative;
   overflow:auto;
-  width: 960px;
+  width: 100%;
   margin: 0 auto;
   padding: 50px 50px 0px;//50
   z-index: 0;
@@ -110,17 +98,12 @@ section {
 }
 
 #projectList {
-  //overflow:hidden;
-  //position:relative;
-
   list-style-type: none;
   width:960px;
   height:100%;
   margin: 90px auto 0px;
   padding: 0;
-  //padding-bottom: 75%;
   background-color: transparent;//Was black
-  //border: 1px solid red;
 }
 
 li {
@@ -172,10 +155,6 @@ li a {
   background-color: @orange;
 }
 
-//li a:hover {
-//  color: @dark-blue;
-//}
-
 ///////////////////////////
 //Footer Styling
 ///////////////////////////
@@ -205,7 +184,6 @@ footer {
 }
 
 #gitActivity{
-//  display: block;
   position:relative;
   margin: 2px 0px 0px 20px;
   padding:0;
@@ -228,4 +206,89 @@ footer small {
   font-size: 12px;
   font-family:@paragraph;
   color: @white;
+}
+
+//Tablet - Landscape - 1024 x 768
+@media all and (max-width: 1024px) {
+
+  section {
+    width: 860px;
+  }
+
+  section header {
+    width:860px;
+    margin: 20px auto;
+  }
+
+  #projectList {
+    width: 860px;
+  }
+}
+
+//Tablet - Portrait - 768 x 1024
+@media all and (max-width: 768px) {
+  #ghBadge {
+    display:none;
+  }
+
+  section {
+    width: 600px;
+  }
+
+  section header {
+    width:600px;
+    margin: 20px auto;
+  }
+
+  #projectList {
+    width: 600px;
+  }
+}
+
+//Smartphone - Landscape - 480 x 320
+@media all and (max-width: 480px) {
+  #ghBadge {
+    display:none;
+  }
+
+  section {
+    width: 480px;
+    margin: 0;
+    padding: 0;
+  }
+
+  section header {
+    display: none;
+  }
+
+  #projectList {
+    width: 480px;
+    margin: 50px 0;
+  }
+
+  li {
+    padding: 0;
+  }
+
+  li h3 {
+    text-align: center;
+    padding: 5px 0px 0px 9px;
+  }
+
+  li p {
+    display: none;
+  }
+
+  li img {
+    display: none;
+  }
+
+  li a {
+    display: none;
+  }
+}
+
+//Smartphone - Portrait - 320 x 480
+@media all and (max-width: 320px) {
+
 }

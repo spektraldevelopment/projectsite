@@ -41,6 +41,7 @@ $(document).ready(function(){
     parseJSON();
     initCopyright();
     initGitActivity();
+    logViewportDimensions();
 
     //////////////////
     ////PARSE JSON
@@ -385,6 +386,25 @@ $(document).ready(function(){
     }
 
     ////////////////////////////
+    ////GET VIEWPORT WIDTH
+    ////////////////////////////
+    function getViewportWidth()
+    {
+        if (window.innerWidth)
+        {
+            return window.innerWidth;
+        }
+        else if (document.body && document.body.offsetWidth)
+        {
+            return document.body.offsetWidth;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    ////////////////////////////
     ////GET VIEWPORT HEIGHT
     ////////////////////////////
     function getViewportHeight()
@@ -401,6 +421,11 @@ $(document).ready(function(){
         {
             return 0;
         }
+    }
+
+    function logViewportDimensions()
+    {
+        console.log("Viewport: Width: " + getViewportWidth() + " Height: " + getViewportHeight());
     }
 
     console.log('Init Spektral Projects');

@@ -3,7 +3,7 @@
 /****************************/
 html,
 body {
-  background-color: #000;
+  background-color: #fff;
 }
 a:hover,
 a:active,
@@ -57,7 +57,7 @@ section header h2 a {
 section {
   position: relative;
   overflow: auto;
-  width: 960px;
+  width: 100%;
   margin: 0 auto;
   padding: 50px 50px 0px;
   z-index: 0;
@@ -158,4 +158,67 @@ footer small {
   font-size: 12px;
   font-family: "myriad-pro", sans-serif;
   color: #ffffff;
+}
+@media all and (max-width: 1024px) {
+  section {
+    width: 860px;
+  }
+  section header {
+    width: 860px;
+    margin: 20px auto;
+  }
+  #projectList {
+    width: 860px;
+  }
+}
+@media all and (max-width: 768px) {
+  #ghBadge {
+    display: none;
+  }
+  section {
+    width: 600px;
+  }
+  section header {
+    width: 600px;
+    margin: 20px auto;
+  }
+  #projectList {
+    width: 600px;
+  }
+}
+@media all and (max-width: 480px) {
+  #ghBadge {
+    display: none;
+  }
+  section {
+    width: 480px;
+    margin: 0;
+    padding: 0;
+  }
+  section header {
+    display: none;
+  }
+  #projectList {
+    width: 480px;
+    margin: 50px 0;
+  }
+  li {
+    padding: 0;
+  }
+  li h3 {
+    text-align: center;
+    padding: 5px 0px 0px 9px;
+  }
+  li p {
+    display: none;
+  }
+  li img {
+    display: none;
+  }
+  li a {
+    display: none;
+  }
+}
+@media all and (max-width: 320px) {
+  
 }

@@ -30,6 +30,8 @@ $(document).ready(function(){
     var VIEWPORT_WIDTH;
     var VIEWPORT_HEIGHT;
 
+    var DEFAULT_PHONE_WIDTH = 496;//480 + 16;
+
     //AddEventListeners
     attachEventListener(logo, 'click', scrollToTop);
     attachEventListener(projectsTitle, 'click', scrollToTop);
@@ -123,23 +125,13 @@ $(document).ready(function(){
     ////////////////////
     function setListHeight()
     {
-
         var lastItem = $('#projectList li:last-child');
 
         var currentListHeight = $('#projectList').height();
         var itemHeight = lastItem.outerHeight();
         var itemMargin = parseInt(lastItem.css('margin-bottom'), 10);
-        var viewportHeight = getViewportHeight();
 
-//        console.log(
-//            "Current List Height: " + currentListHeight
-//          + " itemBottomY: " + itemBottomY
-//          + " bodyHeight: " + bodyHeight
-//          + " viewport Height: " + viewportHeight
-//          + " itemY: " + itemY
-//          + " itemHeight: " + itemHeight);
-
-        newListHeight = currentListHeight + (viewportHeight - (listTopOffset + (itemHeight + itemMargin)));
+        newListHeight = currentListHeight + (VIEWPORT_HEIGHT - (listTopOffset + (itemHeight + itemMargin)));
         projectList.setAttribute("style", "height:" + newListHeight + "px");
 
         //Check if window gets resized
@@ -155,9 +147,9 @@ $(document).ready(function(){
         //To save processor time
         var itemHeight = $('#projectList li:last-child').outerHeight();
         var itemMargin = parseInt($('#projectList li:last-child').css('margin-bottom'), 10);
-        var viewportHeight = getViewportHeight();
+        VIEWPORT_HEIGHT = getViewportHeight();
 
-        var adjustedListHeight = newListHeight + (viewportHeight - (listTopOffset + (itemHeight + itemMargin)));
+        var adjustedListHeight = newListHeight + (VIEWPORT_HEIGHT - (listTopOffset + (itemHeight + itemMargin)));
         projectList.setAttribute("style", "height:" + adjustedListHeight + "px");
     }
 
@@ -204,6 +196,13 @@ $(document).ready(function(){
         listItem.id = data.hash;
         newProjectList.appendChild(listItem);
 
+        if(VIEWPORT_WIDTH <= DEFAULT_PHONE_WIDTH)
+        {
+            attachEventListener(listItem, "click", gotoURL);
+            attachEventListener(listItem, "mouseover", showHandCursor);
+            attachEventListener(listItem, "mouseout", hideHandCursor);
+        }
+
         var title = document.createElement('h3');
         title.innerHTML = data.title;
         listItem.appendChild(title);
@@ -231,6 +230,37 @@ $(document).ready(function(){
         }
 
         itemArray.push(listItem);
+    }
+
+    ///////////////////
+    ////GO TO URL
+    ///////////////////
+    function gotoURL(e)
+    {
+        for(i = 0; i < projectDataArray.length; i++)
+        {
+            if(projectDataArray[i].hash === this.id)
+            {
+                console.log("Navigating to: " + projectDataArray[i].url);
+                window.location.href = projectDataArray[i].url;
+            }
+        }
+    }
+
+    ///////////////////
+    ////SHOW HAND CURSOR
+    ///////////////////
+    function showHandCursor()
+    {
+        this.setAttribute("style", "cursor: pointer");
+    }
+
+    /////////////////////
+    ////HIDE HAND CURSOR
+    ////////////////////
+    function hideHandCursor()
+    {
+        this.setAttribute("style", "cursor: default");
     }
 
 
@@ -431,7 +461,7 @@ $(document).ready(function(){
         VIEWPORT_WIDTH = getViewportWidth();
         VIEWPORT_HEIGHT = getViewportHeight();
 
-        if(VIEWPORT_WIDTH <= 496)//Smartphone - 480 + 16 for scroll
+        if(VIEWPORT_WIDTH <= DEFAULT_PHONE_WIDTH)
         {
             listTopOffset = 120;//Distance from top to bottom of last listItem
         }

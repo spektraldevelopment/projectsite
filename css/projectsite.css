@@ -201,6 +201,9 @@ footer small {
   }
 }
 @media all and (max-width: 496px) {
+  header h1 {
+    text-align: center;
+  }
   #ghBadge {
     display: none;
   }
@@ -252,6 +255,9 @@ footer small {
   }
 }
 @media all and (max-width: 336px) {
+  header h1 {
+    text-align: center;
+  }
   #ghBadge {
     display: none;
   }

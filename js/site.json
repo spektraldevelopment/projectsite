@@ -9,11 +9,11 @@
             "url" : "#One"
         },
         {
-            "title" : "Project Two",
+            "title" : "Portfolio",
             "hash" : "projecttwo",
             "thumb" : "img/placeholder2.jpg",
             "desc" : "Lorem ipsum dolor sit amet.",
-            "url" : "#Two"
+            "url" : "http://spektraldevelopment.com/projects/portfolio/"
         },
         {
             "title" : "Project Three",

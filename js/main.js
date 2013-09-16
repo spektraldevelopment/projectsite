@@ -1,59 +1,69 @@
-$(document).ready(function(){
+$(document).ready(function () {
+    'use strict';
 
     //Self executing function that stops default url bar behaviour when dealing with hash tags
-    ( function( $ ) {
-        $( 'a[href="#"]' ).click( function(e) {
+    (function ($) {
+        $('a[href="#"]').click(function (e) {
             e.preventDefault();
-        } );
+        });
 
-        $(window).hashchange( function(e) {
+        $(window).hashchange(function (e) {
             e.preventDefault();
-        } );
-    } )( jQuery );
+        });
+    }(jQuery));
 
     //Vars
-    var listItem = window.location.hash;
-    var logo = document.getElementById('logo');
-    var projectsTitle = document.getElementById('projectsTitle');
+    var main, listItem, logo, projectsTitle, projectDataArray, itemArray, listTopOffset,
+        newProjectList, newListHeight, glowTween, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, DEFAULT_PHONE_WIDTH;
 
-    var projectDataArray = [];
-    var itemArray = [];
+    main = window;
 
-    var newProjectList;
+    listItem = window.location.hash;
+    logo = document.getElementById('logo');
+    projectsTitle = document.getElementById('projectsTitle');
 
-    var listTopOffset = 140;
+    projectDataArray = [];
+    itemArray = [];
 
-    var newListHeight;
+    listTopOffset = 140;
 
-    var glowTween;
+    DEFAULT_PHONE_WIDTH = 496;//480 + 16;
 
-    var VIEWPORT_WIDTH;
-    var VIEWPORT_HEIGHT;
+    //////////////////
+    ////ATTACH EVENT LISTENER
+    /////////////////
+    function attachEventListener(eventTarget, eventType, eventHandler) {
+        if (eventTarget.addEventListener) {
+            eventTarget.addEventListener(eventType, eventHandler, false);
+        } else if (eventTarget.attachEvent) {
+            eventType = "on" + eventType;
+            eventTarget.attachEvent(eventType, eventHandler);
+        } else {
+            eventTarget["on" + eventType] = eventHandler;
+        }
+    }
 
-    var DEFAULT_PHONE_WIDTH = 496;//480 + 16;
+    //////////////////
+    ////HIGHLIGHT TEXT
+    /////////////////
+    function highlightText() {
+        glowTween = TweenLite.to(this, 0.2, {
+            textShadow: "2px 2px 15px rgba(255, 255, 255, 1)"
+        });
+    }
 
-    //AddEventListeners
-    attachEventListener(logo, 'click', scrollToTop);
-    attachEventListener(projectsTitle, 'click', scrollToTop);
-
-    attachEventListener(logo, 'mouseover', highlightText);
-    attachEventListener(projectsTitle, 'mouseover', highlightText);
-
-    attachEventListener(logo, 'mouseout', removeTextGlow);
-    attachEventListener(projectsTitle, 'mouseout', removeTextGlow);
-
-    //Initialize Functions
-    getViewportDimensions();
-    parseJSON();
-    initCopyright();
-    initGitActivity();
+    //////////////////
+    ////REMOVE TEXT GLOW
+    /////////////////
+    function removeTextGlow() {
+        glowTween.reverse();
+    }
 
     //////////////////
     ////PARSE JSON
     /////////////////
-    function parseJSON()
-    {
-        $.each(jsonFile, function(key, val) {
+    function parseJSON() {
+        $.each(main.jsonFile, function(key, val) {
             projectDataArray = val;
         });
 
@@ -65,45 +75,35 @@ $(document).ready(function(){
     //////////////////
     ////CHECK FOR HASH
     //////////////////
-    function checkForHash()
-    {
-        if(listItem)
-        {
+    function checkForHash() {
+        if(listItem) {
             var projectHash;
 
-            for (var i =0; i < projectDataArray.length; i++)
-            {
+            for (var i = 0; i < projectDataArray.length; i++) {
                 projectHash = "#" + projectDataArray[i].hash;
 
                 //Check if hashtag is valid
-                if(listItem === projectHash)
-                {
+                if(listItem === projectHash) {
                     console.log("Hash Found: " + listItem);
                     scrollToElement(listItem);
-                }
-                else { console.log("Hash invalid!"); }
+                } else { console.log("Hash invalid!"); }
             }
-        }
-        else
-        {
+        } else {
             console.log("No Hash Found!");
         }
 
         var currentHashY = 0;
 
-        try
-        {
+        try {
             currentHashY = $(listItem).position().top - listTopOffset;
             console.log("CurrentY: " + currentHashY);
-        } catch(err)
-        {
+        } catch(err) {
             console.log("currentHashY not set yet.");
         }
 
         //Detects a hash change in order to
         //prevent
-        $(window).hashchange( function(e)
-        {
+        $(window).hashchange(function (e) {
             window.scrollTo(0, currentHashY);//Prevents element from jumping to top
 
             var hash = window.location.hash.substring(1);
@@ -117,14 +117,13 @@ $(document).ready(function(){
 
             e.preventDefault();
             return false;
-        })
+        });
     }
 
     ////////////////////
     ////SET LIST HEIGHT
     ////////////////////
-    function setListHeight()
-    {
+    function setListHeight() {
         var lastItem = $('#projectList li:last-child');
 
         var currentListHeight = $('#projectList').height();
@@ -132,7 +131,7 @@ $(document).ready(function(){
         var itemMargin = parseInt(lastItem.css('margin-bottom'), 10);
 
         newListHeight = currentListHeight + (VIEWPORT_HEIGHT - (listTopOffset + (itemHeight + itemMargin)));
-        projectList.setAttribute("style", "height:" + newListHeight + "px");
+        newProjectList.setAttribute("style", "height:" + newListHeight + "px");
 
         //Check if window gets resized
         attachEventListener(window, "resize", onWindowResize);
@@ -141,8 +140,7 @@ $(document).ready(function(){
     ////////////////////
     ////RESET LIST HEIGHT
     ///////////////////
-    function resetListHeight()
-    {
+    function resetListHeight() {
         //The item height and item margin don't change so I might make them a global var and set them once
         //To save processor time
         var itemHeight = $('#projectList li:last-child').outerHeight();
@@ -150,14 +148,13 @@ $(document).ready(function(){
         VIEWPORT_HEIGHT = getViewportHeight();
 
         var adjustedListHeight = newListHeight + (VIEWPORT_HEIGHT - (listTopOffset + (itemHeight + itemMargin)));
-        projectList.setAttribute("style", "height:" + adjustedListHeight + "px");
+        newProjectList.setAttribute("style", "height:" + adjustedListHeight + "px");
     }
 
     //////////////////
     /////ON WINDOW RESIZE
     //////////////////
-    function onWindowResize()
-    {
+    function onWindowResize() {
         resetListHeight();
     }
 
@@ -165,8 +162,7 @@ $(document).ready(function(){
     ////BUILD LIST
     ////If js is enabled we want to build a dynamic list via JSON data: js/site.json.
     /////////////////
-    function buildList()
-    {
+    function buildList() {
         var listSection = document.getElementById('listSection');
 
         var projectList = document.createElement('ul');//
@@ -175,8 +171,7 @@ $(document).ready(function(){
 
         newProjectList = projectList;
 
-        for(var i = 0; i < projectDataArray.length; i++)
-        {
+        for(var i = 0; i < projectDataArray.length; i++) {
             buildListItem(i, projectDataArray[i]);
         }
 
@@ -190,14 +185,12 @@ $(document).ready(function(){
     //////////////////
     ////BUILD LIST ITEM
     /////////////////
-    function buildListItem(id, data)
-    {
+    function buildListItem(id, data) {
         var listItem = document.createElement('li');
         listItem.id = data.hash;
         newProjectList.appendChild(listItem);
 
-        if(VIEWPORT_WIDTH <= DEFAULT_PHONE_WIDTH)
-        {
+        if(VIEWPORT_WIDTH <= DEFAULT_PHONE_WIDTH) {
             attachEventListener(listItem, "click", gotoURL);
             attachEventListener(listItem, "mouseover", showHandCursor);
             attachEventListener(listItem, "mouseout", hideHandCursor);
@@ -224,8 +217,7 @@ $(document).ready(function(){
         attachEventListener(link, 'mouseover', highlightLink);
         attachEventListener(link, 'mouseout', removeHighlight);
 
-        if(id === 0)
-        {
+        if(id === 0) {
            link.setAttribute("style", "visibility: hidden");
         }
 
@@ -235,12 +227,9 @@ $(document).ready(function(){
     ///////////////////
     ////GO TO URL
     ///////////////////
-    function gotoURL(e)
-    {
-        for(i = 0; i < projectDataArray.length; i++)
-        {
-            if(projectDataArray[i].hash === this.id)
-            {
+    function gotoURL() {
+        for(var i = 0; i < projectDataArray.length; i++) {
+            if(projectDataArray[i].hash === this.id) {
                 console.log("Navigating to: " + projectDataArray[i].url);
                 window.location.href = projectDataArray[i].url;
             }
@@ -250,16 +239,14 @@ $(document).ready(function(){
     ///////////////////
     ////SHOW HAND CURSOR
     ///////////////////
-    function showHandCursor()
-    {
+    function showHandCursor() {
         this.setAttribute("style", "cursor: pointer");
     }
 
     /////////////////////
     ////HIDE HAND CURSOR
     ////////////////////
-    function hideHandCursor()
-    {
+    function hideHandCursor() {
         this.setAttribute("style", "cursor: default");
     }
 
@@ -267,8 +254,7 @@ $(document).ready(function(){
     //////////////////
     ////INIT COPYRIGHT
     /////////////////
-    function initCopyright()
-    {
+    function initCopyright() {
        var d = new Date();
        var y = d.getFullYear();
 
@@ -280,10 +266,8 @@ $(document).ready(function(){
     //////////////////
     ////INIT GIT ACTIVITY
     /////////////////
-    function initGitActivity()
-    {
-        try
-        {
+    function initGitActivity() {
+        try{
         $('#gitActivity').FeedEk({
             FeedUrl : 'https://github.com/spektraldevelopment.atom?=' + Math.random(),
             MaxCount : 1,
@@ -295,68 +279,39 @@ $(document).ready(function(){
     }
 
     //////////////////
-    ////SCROLL TO TOP
-    /////////////////
-    function scrollToTop(e)
-    {
-        scrollToElement('#' + projectDataArray[0].hash);
-    }
-
-    //////////////////
     ////SCROLL TO ELEMENT
     /////////////////
-    function scrollToElement( target )
-    {
+    function scrollToElement(target) {
         var docState;
 
         checkDocReady();
 
-        function checkDocReady()
-        {
+        function checkDocReady() {
             docState = document.readyState;
             console.log("checkDocReady: " + docState);
 
-            if(docState !== 'complete')
-            {
-                setTimeout(checkDocReady, 100)
+            if(docState !== 'complete') {
+                setTimeout(checkDocReady, 100);
             } else {
                 var itemPos = $(target).position().top - listTopOffset;
-                TweenLite.to(window, 1.5, {scrollTo:{y:itemPos}, ease: Expo.easeOut, onComplete: scrollComplete, onCompleteParams:[target]});
+                TweenLite.to(window, 1.5, {scrollTo:{y:itemPos}, ease: Expo.easeOut});
             }
         }
-
         return false;
     }
 
-    function scrollComplete(item)
-    {
-       //Just keeping this just in case
-    }
-
     //////////////////
-    ////HIGHLIGHT TEXT
+    ////SCROLL TO TOP
     /////////////////
-    function highlightText()
-    {
-        glowTween = TweenLite.to(this, .2, {
-            textShadow:"2px 2px 15px rgba(255, 255, 255, 1)"
-        });
-    }
-
-    //////////////////
-    ////REMOVE TEXT GLOW
-    /////////////////
-    function removeTextGlow()
-    {
-        glowTween.reverse();
+    function scrollToTop() {
+        scrollToElement('#' + projectDataArray[0].hash);
     }
 
     //////////////////////
     ////HIGHLIGHT LINK
     //////////////////////
-    function highlightLink()
-    {
-        glowTween = TweenLite.to(this, .2, {
+    function highlightLink() {
+        glowTween = TweenLite.to(this, 0.2, {
             boxShadow: "0px 0px 25px 2px rgba(235, 127, 0, 1)",
             backgroundColor:"#eb7f00"
         });
@@ -365,38 +320,15 @@ $(document).ready(function(){
     /////////////////////
     ////REMOVE HIGHLIGHT
     /////////////////////
-    function removeHighlight()
-    {
+    function removeHighlight() {
         glowTween.reverse();
-    }
-
-    //////////////////
-    ////ATTACH EVENT LISTENER
-    /////////////////
-    function attachEventListener(eventTarget, eventType, eventHandler)
-    {
-        if(eventTarget.addEventListener)
-        {
-            eventTarget.addEventListener(eventType, eventHandler, false)
-        }
-        else if(eventTarget.attachEvent)
-        {
-            eventType = "on" + eventType;
-            eventTarget.attachEvent(eventType, eventHandler)
-        }
-        else
-        {
-            eventTarget["on" + eventType] = eventHandler;
-        }
     }
 
     /////////////////////
     ////SET WAY POINTS
     /////////////////////
-    function setWayPoints()
-    {
-        for (var i = 0; i < itemArray.length; i++)
-        {
+    function setWayPoints() {
+        for (var i = 0; i < itemArray.length; i++) {
             var item = $(itemArray[i]);
             item.waypoint(checkForItem);
         }
@@ -405,15 +337,11 @@ $(document).ready(function(){
     ///////////////////////////////////
     ////CHECK FOR ITEM
     ///////////////////////////////////
-    function checkForItem(e)
-    {
-        if(e === "down")
-        {
-            TweenLite.to(this, .5, { opacity: 0});
-        }
-        else
-        {
-            TweenLite.to(this, .5, { opacity: 1});
+    function checkForItem(e) {
+        if(e === "down") {
+            TweenLite.to(this, 0.5, { opacity: 0});
+        } else {
+            TweenLite.to(this, 0.5, { opacity: 1});
         }
         //console.log("Waypoint Hit: " + e + " ID: " + this.id + " TOP: " + $(this).offset().top);
     }
@@ -421,18 +349,12 @@ $(document).ready(function(){
     ////////////////////////////
     ////GET VIEWPORT WIDTH
     ////////////////////////////
-    function getViewportWidth()
-    {
-        if (window.innerWidth)
-        {
+    function getViewportWidth() {
+        if (window.innerWidth) {
             return window.innerWidth;
-        }
-        else if (document.body && document.body.offsetWidth)
-        {
+        } else if (document.body && document.body.offsetWidth) {
             return document.body.offsetWidth;
-        }
-        else
-        {
+        } else {
             return 0;
         }
     }
@@ -440,34 +362,44 @@ $(document).ready(function(){
     ////////////////////////////
     ////GET VIEWPORT HEIGHT
     ////////////////////////////
-    function getViewportHeight()
-    {
-        if (window.innerHeight)
-        {
+    function getViewportHeight() {
+        if (window.innerHeight) {
             return window.innerHeight;
-        }
-        else if (document.body && document.body.offsetHeight)
-        {
+        } else if (document.body && document.body.offsetHeight) {
             return document.body.offsetHeight;
-        }
-        else
-        {
+        } else {
             return 0;
         }
     }
 
-    function getViewportDimensions()
-    {
+    ////////////////////////////
+    ////GET VIEWPORT DIMENSIONS
+    ////////////////////////////
+    function getViewportDimensions() {
         VIEWPORT_WIDTH = getViewportWidth();
         VIEWPORT_HEIGHT = getViewportHeight();
 
-        if(VIEWPORT_WIDTH <= DEFAULT_PHONE_WIDTH)
-        {
+        if(VIEWPORT_WIDTH <= DEFAULT_PHONE_WIDTH) {
             listTopOffset = 120;//Distance from top to bottom of last listItem
         }
-
         console.log("Viewport: Width: " + VIEWPORT_WIDTH + " Height: " + VIEWPORT_HEIGHT);
     }
+
+    //AddEventListeners
+    attachEventListener(logo, 'click', scrollToTop);
+    attachEventListener(projectsTitle, 'click', scrollToTop);
+
+    attachEventListener(logo, 'mouseover', highlightText);
+    attachEventListener(projectsTitle, 'mouseover', highlightText);
+
+    attachEventListener(logo, 'mouseout', removeTextGlow);
+    attachEventListener(projectsTitle, 'mouseout', removeTextGlow);
+
+    //Initialize Functions
+    getViewportDimensions();
+    parseJSON();
+    initCopyright();
+    initGitActivity();
 
     console.log('Init Spektral Projects');
 });

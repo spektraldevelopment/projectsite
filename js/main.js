@@ -385,6 +385,41 @@ $(document).ready(function () {
         console.log("Viewport: Width: " + VIEWPORT_WIDTH + " Height: " + VIEWPORT_HEIGHT);
     }
 
+    //////////////////////////////////////
+    ////ON KEYBOARD EVENT
+    //////////////////////////////////////
+    function onKeyboardEvent(e) {
+
+        //var currentScroll = $(window).scrollTop();
+        //console.log("Current Scroll");
+
+        var key = e.keyCode;
+
+        //UP
+        if(key === 38) {
+
+            console.log("UP");
+        }
+
+        //DOWN
+        if(key === 40) {
+
+            console.log("DOWN");
+        }
+
+        //LEFT
+        if(key === 37) {
+
+            console.log("LEFT");
+        }
+
+        //RIGHT
+        if(key === 39) {
+
+            console.log("RIGHT");
+        }
+    }
+
     //AddEventListeners
     attachEventListener(logo, 'click', scrollToTop);
     attachEventListener(projectsTitle, 'click', scrollToTop);
@@ -394,6 +429,8 @@ $(document).ready(function () {
 
     attachEventListener(logo, 'mouseout', removeTextGlow);
     attachEventListener(projectsTitle, 'mouseout', removeTextGlow);
+
+    attachEventListener(window, 'keydown', onKeyboardEvent);
 
     //Initialize Functions
     getViewportDimensions();

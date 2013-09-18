@@ -204,17 +204,15 @@ footer {
 
 #linkedIn {
   position:relative;
-  margin: 2px 0px 0px 20px;
-  padding:0;
   float: left;
-  text-decoration: none;
-  font-size: 12px;
-  font-family:@paragraph;
-  color: @white;
-}
-
-#linkedIn:hover {
-  color: @med-blue;
+  background: url("../img/linkedin.png") no-repeat scroll 0 0 transparent;
+  margin: 2px 0px 2px 20px;
+  width:16px;
+  height: auto;
+  display: block;
+  background-size: 16px Auto;
+  text-indent: -9999px;
+  cursor: pointer;
 }
 
 #gitActivity{
@@ -355,8 +353,17 @@ footer small {
   }
 
   #linkedIn {
-    font-size: 24px;
-    margin: 6px 0px 0px 20px;
+    position:relative;
+    //float: left;
+    background: url("../img/linkedin.png") no-repeat scroll 0 0 transparent;
+    margin: 2px auto;
+    padding: 0 2px 0;
+    width:38px;
+    height: 100%;
+    display: inline-block;
+    background-size: 38px auto;
+    text-indent: -9999px;
+    cursor: pointer;
   }
 
   #gitActivity {
@@ -364,16 +371,26 @@ footer small {
   }
 
   #gitHubLink {
-    display: inline;
-    font-size: 24px;
-    margin: 6px 0px 0px 20px;
+    position:relative;
+    //float:right;
+    background: url("../img/github.png") no-repeat scroll 0 0 transparent;
+    margin: 2px auto;
+    padding: 0 2px 0;
+    width:38px;
+    height: 100%;
+    display: inline-block;
+    background-size: 38px auto;
+    text-indent: -9999px;
+    cursor: pointer;
   }
 
   footer {
     height: 40px;
+    padding: 0 50% 0;
   }
 
   footer small {
+    display: none;
     margin: 18px 20px 0px 0px;
   }
 }

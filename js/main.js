@@ -4,44 +4,29 @@ $(document).ready(function () {
     //Self executing function that stops default url bar behaviour when dealing with hash tags
     (function ($) {
         $('a[href="#"]').click(function (e) {
-            e.preventDefault();
+            cancelEvent(e);
         });
 
         $(window).hashchange(function (e) {
-            e.preventDefault();
+            cancelEvent(e);
         });
     }(jQuery));
 
     //Vars
-    var main, listItem, logo, projectsTitle, projectDataArray, itemArray, listTopOffset,
-        newProjectList, newListHeight, glowTween, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, DEFAULT_PHONE_WIDTH;
-
-    main = window;
-
-    listItem = window.location.hash;
-    logo = document.getElementById('logo');
-    projectsTitle = document.getElementById('projectsTitle');
-
-    projectDataArray = [];
-    itemArray = [];
-
-    listTopOffset = 140;
-
-    DEFAULT_PHONE_WIDTH = 496;//480 + 16;
-
-    //////////////////
-    ////ATTACH EVENT LISTENER
-    /////////////////
-    function attachEventListener(eventTarget, eventType, eventHandler) {
-        if (eventTarget.addEventListener) {
-            eventTarget.addEventListener(eventType, eventHandler, false);
-        } else if (eventTarget.attachEvent) {
-            eventType = "on" + eventType;
-            eventTarget.attachEvent(eventType, eventHandler);
-        } else {
-            eventTarget["on" + eventType] = eventHandler;
-        }
-    }
+    var main = window,
+        listItem = window.location.hash,
+        logo = document.getElementById('logo'),
+        projectsTitle = document.getElementById('projectsTitle'),
+        projectDataArray = [],
+        itemArray = [],
+        listTopOffset = 140,
+        newProjectList,
+        newListHeight,
+        glowTween,
+        VIEWPORT_WIDTH,
+        VIEWPORT_HEIGHT,
+        DEFAULT_PHONE_WIDTH = 496,
+        currentItem = 0;
 
     //////////////////
     ////HIGHLIGHT TEXT
@@ -85,6 +70,7 @@ $(document).ready(function () {
                 //Check if hashtag is valid
                 if(listItem === projectHash) {
                     console.log("Hash Found: " + listItem);
+                    currentItem = $(listItem).index();
                     scrollToElement(listItem);
                 } else { console.log("Hash invalid!"); }
             }
@@ -115,8 +101,8 @@ $(document).ready(function () {
 
             console.log("Hash Change: " + location.hash);
 
-            e.preventDefault();
-            return false;
+            cancelEvent(e);
+            //return false;
         });
     }
 
@@ -347,32 +333,6 @@ $(document).ready(function () {
     }
 
     ////////////////////////////
-    ////GET VIEWPORT WIDTH
-    ////////////////////////////
-    function getViewportWidth() {
-        if (window.innerWidth) {
-            return window.innerWidth;
-        } else if (document.body && document.body.offsetWidth) {
-            return document.body.offsetWidth;
-        } else {
-            return 0;
-        }
-    }
-
-    ////////////////////////////
-    ////GET VIEWPORT HEIGHT
-    ////////////////////////////
-    function getViewportHeight() {
-        if (window.innerHeight) {
-            return window.innerHeight;
-        } else if (document.body && document.body.offsetHeight) {
-            return document.body.offsetHeight;
-        } else {
-            return 0;
-        }
-    }
-
-    ////////////////////////////
     ////GET VIEWPORT DIMENSIONS
     ////////////////////////////
     function getViewportDimensions() {
@@ -390,34 +350,32 @@ $(document).ready(function () {
     //////////////////////////////////////
     function onKeyboardEvent(e) {
 
-        //var currentScroll = $(window).scrollTop();
-        //console.log("Current Scroll");
-
         var key = e.keyCode;
 
         //UP
         if(key === 38) {
-
+            currentItem--;
+            if(currentItem <= 0)
+            {
+                currentItem = 0;
+            }
             console.log("UP");
         }
 
         //DOWN
         if(key === 40) {
-
+            currentItem++;
+            if(currentItem >= itemArray.length)
+            {
+                currentItem = itemArray.length - 1;
+            }
             console.log("DOWN");
         }
 
-        //LEFT
-        if(key === 37) {
+        scrollToElement(itemArray[currentItem]);
+        console.log("CurrentItem: " + currentItem);
 
-            console.log("LEFT");
-        }
-
-        //RIGHT
-        if(key === 39) {
-
-            console.log("RIGHT");
-        }
+        cancelEvent(e);
     }
 
     //AddEventListeners

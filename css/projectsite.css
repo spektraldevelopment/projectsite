@@ -201,14 +201,14 @@ footer small {
     display: none;
   }
   section {
-    width: 600px;
+    width: 620px;
   }
   section header {
-    width: 600px;
+    width: 620px;
     margin: 20px auto;
   }
   #projectList {
-    width: 600px;
+    width: 620px;
   }
 }
 @media all and (max-width: 496px) {

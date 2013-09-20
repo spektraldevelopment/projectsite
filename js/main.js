@@ -164,6 +164,7 @@ $(document).ready(function () {
         setWayPoints();
         checkForHash();
         $(window).load(setListHeight());
+        attachEventListener(window, 'orientationchange', setListHeight);
 
         console.log("Build List: " + projectDataArray.length);
     }

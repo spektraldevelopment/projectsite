@@ -187,6 +187,9 @@ footer small {
   color: #ffffff;
 }
 @media all and (max-width: 1040px) {
+  header {
+    position: absolute;
+  }
   section {
     width: 860px;
   }
@@ -291,6 +294,9 @@ footer small {
   }
 }
 @media all and (max-width: 336px) {
+  header {
+    position: absolute;
+  }
   header h1 {
     text-align: center;
   }

@@ -267,10 +267,6 @@ footer small {
 //Tablet - Landscape - 1024 x 768
 @media all and (max-width: @tabletLandscape) {
 
-  header {
-    position: absolute;
-  }
-
   section {
     width: @tabLandWidth;//860px
   }
@@ -307,6 +303,10 @@ footer small {
 
 //Smartphone - Landscape - 480 x 320
 @media all and (max-width: @phoneLandscape) {
+
+  header {
+    position: inherit;
+  }
 
   header h1 {
     text-align: center;
@@ -405,7 +405,7 @@ footer small {
 @media all and (max-width: @phonePortrait) {
 
   header {
-    position: absolute;
+    position: inherit;
   }
 
   header h1 {

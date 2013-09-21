@@ -214,6 +214,12 @@ footer small {
   }
 }
 @media all and (max-width: 496px) {
+  header {
+    width: 480px;
+    left: 50%;
+    top: 0;
+    margin-left: -240px;
+  }
   header h1 {
     text-align: center;
   }
@@ -291,6 +297,12 @@ footer small {
   }
 }
 @media all and (max-width: 336px) {
+  header {
+    width: 320px;
+    left: 50%;
+    top: 0;
+    margin-left: -160px;
+  }
   header h1 {
     text-align: center;
   }

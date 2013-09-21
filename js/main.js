@@ -379,6 +379,15 @@ $(document).ready(function () {
         cancelEvent(e);
     }
 
+    function onWindowScroll() {
+
+        var vWidth = getViewportWidth();
+
+        if(vWidth <=480) {
+            $('header').css({ top: '0px' });
+        }
+    }
+
     //AddEventListeners
     attachEventListener(logo, 'click', scrollToTop);
     attachEventListener(projectsTitle, 'click', scrollToTop);
@@ -390,6 +399,8 @@ $(document).ready(function () {
     attachEventListener(projectsTitle, 'mouseout', removeTextGlow);
 
     attachEventListener(window, 'keydown', onKeyboardEvent);
+
+    attachEventListener(window, 'scroll', onWindowScroll);
 
     //Initialize Functions
     getViewportDimensions();

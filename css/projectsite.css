@@ -215,7 +215,7 @@ footer small {
 }
 @media all and (max-width: 496px) {
   header {
-    position: inherit;
+    position: static;
   }
   header h1 {
     text-align: center;
@@ -295,7 +295,7 @@ footer small {
 }
 @media all and (max-width: 336px) {
   header {
-    position: inherit;
+    position: static;
   }
   header h1 {
     text-align: center;

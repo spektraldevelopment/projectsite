@@ -189,6 +189,9 @@ $(document).ready(function () {
 
         var image = document.createElement('img');
         image.src = data.thumb;
+
+        attachEventListener(image, 'error', onImageError);
+
         image.setAttribute("alt", data.title);
         listItem.appendChild(image);
 
@@ -209,6 +212,15 @@ $(document).ready(function () {
         }
 
         itemArray.push(listItem);
+    }
+
+    ///////////////////
+    ////ON IMAGE ERROR
+    ///////////////////
+    function onImageError(e) {
+        var image = e.target;
+        image.src = "img/projects/no-image.jpg";
+        console.log("Image Error: " + e.target);
     }
 
     ///////////////////
@@ -383,7 +395,7 @@ $(document).ready(function () {
 
         var vWidth = getViewportWidth();
 
-        if(vWidth <=480) {
+        if(vWidth <= 480) {
             $('header').css({ top: '0px' });
         }
     }

@@ -112,15 +112,15 @@
             })();
 
             //GLOBAL
-            var jsonFile;
-            var descriptions = [
+            var jsonFile, preloader, descriptions, descArray = [], i;
+            descriptions = [
                 "desc/ProjectSite.txt",
                 "desc/Spektraljs.txt",
                 "desc/Portfolio.txt",
                 "desc/TheRandomizer.txt"];
 
             //Preload all needed scripts
-            var preloader = new createjs.LoadQueue(false, "");
+            preloader = new createjs.LoadQueue(false, "");
 
             preloader.addEventListener("error", onLoadError)
             preloader.addEventListener("fileload", onFileLoaded);
@@ -128,6 +128,11 @@
 
             //JSON
             preloader.loadFile({id: "JSON", src: "js/site.json"});
+
+            for (i = 0; i < descriptions.length; i += 1) {
+                //TXT
+                preloader.loadFile({id:"TEXT", src:descriptions[i]});
+            }
 
             //JS
             preloader.loadFile({id: "JavaScript", src:"js/vendor/modernizr-2.6.2.min.js"});
@@ -139,6 +144,7 @@
             preloader.loadFile({id: "JavaScript", src:"js/vendor/greensock/plugins/ScrollToPlugin.min.js"});
             preloader.loadFile({id: "JavaScript", src:"js/plugins.js"});
             preloader.loadFile({id: "JavaScript", src:"js/helper.js"});
+            preloader.loadFile({id: "JavaScript", src:"js/spektral/spektral-beta.js"});
             preloader.loadFile({id: "JavaScript", src:"js/main.js"});
 
             preloader.load();
@@ -167,6 +173,9 @@
                     case createjs.LoadQueue.JSON:
                         jsonFile = e.result;
                         break;
+
+                    case createjs.LoadQueue.TEXT:
+                        descArray.push(e.result);
                 }
                 // console.log("File Loaded! Item: " + item + " Type: " + type);
             }

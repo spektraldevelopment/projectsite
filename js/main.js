@@ -195,8 +195,10 @@ $(document).ready(function () {
         image.setAttribute("alt", data.title);
         listItem.appendChild(image);
 
+        //Will be loading external .txt files
         var para = document.createElement('p');
-        para.innerHTML = data.desc;
+        para.innerHTML = descArray[id];
+
         listItem.appendChild(para);
 
         var link = document.createElement('a');

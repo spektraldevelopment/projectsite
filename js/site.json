@@ -31,7 +31,7 @@
             "thumb" : "img/projects/the-randomizer.jpg",
             "desc" : "desc/TheRandomizer.txt",
             "url" : "http://github.com/spektraldevelopment/therandomizer",
-            "tech" : "JavaScript"
+            "tech" : "JavaScript, YouTube API"
         }
    ]
 }

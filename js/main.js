@@ -201,6 +201,10 @@ $(document).ready(function () {
 
         listItem.appendChild(para);
 
+        var tech = document.createElement('h4');
+        tech.innerHTML = "Technology: " + data.tech;
+        listItem.appendChild(tech);
+
         var link = document.createElement('a');
         link.href = data.url;
         link.innerHTML = "GO";

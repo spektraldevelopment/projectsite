@@ -99,6 +99,24 @@ li h3 {
   font-family: "proxima-nova", sans-serif;
   color: #ffffff;
 }
+li h4 {
+  margin: 0;
+  padding: 12px 0 0 20px;
+  font-style: normal;
+  font-weight: 400;
+  font-family: "proxima-nova", sans-serif;
+  color: #ffffff;
+  float: left;
+}
+.techLink {
+  margin: 0;
+  padding: 12px 0 0 20px;
+  font-style: normal;
+  font-weight: 400;
+  font-family: "proxima-nova", sans-serif;
+  color: #ffffff;
+  float: left;
+}
 li img {
   width: 100px;
   height: 50px;

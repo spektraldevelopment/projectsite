@@ -7,7 +7,7 @@
             "thumb" : "img/projects/project-site.jpg",
             "desc" : "desc/ProjectSite.txt",
             "url" : "#site",
-            "tech" : "JavaScript, Less, jQuery, PreloadJS"
+            "tech" : "<a class=\"techLink\" href=\"http://en.wikipedia.org/wiki/JavaScript\">Javascript</a>, <a class=\"techLink\" href=\"http://lesscss.org\">LESS</a>, <a class=\"techLink\" href=\"http://jquery.com/\">jQuery</a>, <a class=\"techLink\" href=\"http://www.createjs.com/#!/PreloadJS\">PreloadJS</a>"
         },
         {
             "title" : "Project: Spektraljs",
@@ -15,7 +15,7 @@
             "thumb" : "img/projects/spektraljs.jpg",
             "desc" : "desc/Spektraljs.txt",
             "url" : "http://github.com/spektraldevelopment/spektraljs",
-            "tech" : "Javascript"
+            "tech" : "<a class=\"techLink\" href=\"http://en.wikipedia.org/wiki/JavaScript\">Javascript</a>"
         },
         {
             "title" : "Project: Portfolio",

@@ -206,6 +206,7 @@ $(document).ready(function () {
         listItem.appendChild(tech);
 
         var link = document.createElement('a');
+        link.setAttribute("class", "gotoSite");
         link.href = data.url;
         link.innerHTML = "GO";
         listItem.appendChild(link);

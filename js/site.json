@@ -7,7 +7,7 @@
             "thumb" : "img/projects/project-site.jpg",
             "desc" : "desc/ProjectSite.txt",
             "url" : "#site",
-            "tech" : "<a class=\"techLink\" href=\"http://en.wikipedia.org/wiki/JavaScript\">Javascript</a>, <a class=\"techLink\" href=\"http://lesscss.org\">LESS</a>, <a class=\"techLink\" href=\"http://jquery.com/\">jQuery</a>, <a class=\"techLink\" href=\"http://www.createjs.com/#!/PreloadJS\">PreloadJS</a>"
+            "tech" : "JavaScript, <a class=\"techLink\" href=\"http://lesscss.org\">LESS</a>, <a class=\"techLink\" href=\"http://jquery.com/\">jQuery</a>, <a class=\"techLink\" href=\"https://typekit.com/\">Typekit</a>, <a class=\"techLink\" href=\"http://www.createjs.com/#!/PreloadJS\">PreloadJS</a>"
         },
         {
             "title" : "Project: Spektraljs",
@@ -15,7 +15,7 @@
             "thumb" : "img/projects/spektraljs.jpg",
             "desc" : "desc/Spektraljs.txt",
             "url" : "http://github.com/spektraldevelopment/spektraljs",
-            "tech" : "<a class=\"techLink\" href=\"http://en.wikipedia.org/wiki/JavaScript\">Javascript</a>"
+            "tech" : "JavaScript"
         },
         {
             "title" : "Project: Portfolio",
@@ -23,7 +23,7 @@
             "thumb" : "img/projects/portfolio.jpg",
             "desc" : "desc/Portfolio.txt",
             "url" : "http://spektraldevelopment.com/projects/portfolio/",
-            "tech" : "JavaScript, GSAP"
+            "tech" : "JavaScript, <a class=\"techLink\" href=\"http://www.greensock.com/gsap-js/\">GSAP</a>, <a class=\"techLink\" href=\"https://typekit.com/\">Typekit</a>, <a class=\"techLink\" href=\"http://www.createjs.com/#!/EaselJS\">EaselJS</a>"
         },
         {
             "title" : "Project: The Randomizer",
@@ -31,7 +31,7 @@
             "thumb" : "img/projects/the-randomizer.jpg",
             "desc" : "desc/TheRandomizer.txt",
             "url" : "http://github.com/spektraldevelopment/therandomizer",
-            "tech" : "JavaScript, YouTube API"
+            "tech" : "JavaScript, <a class=\"techLink\" href=\"https://developers.google.com/youtube/js_api_reference\">YouTube API</a>"
         }
    ]
 }

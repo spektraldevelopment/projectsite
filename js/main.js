@@ -214,6 +214,15 @@ $(document).ready(function () {
         attachEventListener(link, 'mouseover', highlightLink);
         attachEventListener(link, 'mouseout', removeHighlight);
 
+        var aTagTech = document.getElementsByClassName("techLink");
+
+        console.log("techTagType: " + Spektral.getType(aTagTech));
+
+        for( var i =0; i < aTagTech.length; i += 1) {
+            attachEventListener(aTagTech[i], 'mouseover', highlightText);
+            attachEventListener(aTagTech[i], 'mouseout', removeTextGlow);
+        }
+
         if(id === 0) {
            link.setAttribute("style", "visibility: hidden");
         }

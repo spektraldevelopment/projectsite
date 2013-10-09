@@ -416,6 +416,46 @@ $(document).ready(function () {
         }
     }
 
+    function gaPageview(page, title) {
+
+        page = page || null;
+        title = page || null;
+        if (page !== null && title !== null) {
+            ga('send', { 'hitType': 'pageview', 'page': page, 'title':  title });
+        } else if (page !== && title === null{
+            throwError("gaPageview: No title given. Please specify a title.");
+        } else if (page === null && title !== null) {
+            throwError("gaPageview: No page given. Please specify a page.");
+        } else {
+            ga('send', 'pageview');
+        }
+    }
+
+    function gaEvent(category, action, type, label, value) {
+
+        var valueType = Spektral.getType(value);
+        if (valueType !== "number") {
+            throwError("gaEvent: Value must be a number.")
+        }
+        if (category === null) {
+            throwError("gaEvent: Category is required.");
+        }
+        if (category === null) {
+            throwError("gaEvent: Category is required.");
+        }
+        //Can be more detailed, aka mouseEvent, load event etc.
+        type = type || "event";
+        label = label || null;
+        value = value || null;
+        if (label === null && value === null) {
+            ga('send', type, category, action);
+        } else if (label !== null) {
+            ga('send', type, category, action, label);
+        } else if (value !== null) {
+            ga('send', type, category, action, label, value);
+        }
+    }
+
     //AddEventListeners
     attachEventListener(logo, 'click', scrollToTop);
     attachEventListener(projectsTitle, 'click', scrollToTop);

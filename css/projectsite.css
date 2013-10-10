@@ -204,34 +204,7 @@ footer small {
   font-family: "myriad-pro", sans-serif;
   color: #ffffff;
 }
-@media all and (max-width: 1040px) {
-  section {
-    width: 860px;
-  }
-  section header {
-    width: 860px;
-    margin: 20px auto;
-  }
-  #projectList {
-    width: 860px;
-  }
-}
-@media all and (max-width: 784px) {
-  #ghBadge {
-    display: none;
-  }
-  section {
-    width: 620px;
-  }
-  section header {
-    width: 620px;
-    margin: 20px auto;
-  }
-  #projectList {
-    width: 620px;
-  }
-}
-@media all and (max-width: 496px) {
+@media all and (max-width: 1024px) {
   header h1 {
     text-align: center;
   }
@@ -311,7 +284,7 @@ footer small {
     margin: 18px 20px 0px 0px;
   }
 }
-@media all and (max-width: 336px) {
+@media all and (max-width: 768px) {
   header h1 {
     text-align: center;
   }

@@ -422,10 +422,10 @@ $(document).ready(function () {
         title = page || null;
         if (page !== null && title !== null) {
             ga('send', { 'hitType': 'pageview', 'page': page, 'title':  title });
-        } else if (page !== && title === null{
-            throwError("gaPageview: No title given. Please specify a title.");
+        } else if (page !== null && title === null) {
+            throw new Error("gaPageview: No title given. Please specify a title.");
         } else if (page === null && title !== null) {
-            throwError("gaPageview: No page given. Please specify a page.");
+            throw new Error("gaPageview: No page given. Please specify a page.");
         } else {
             ga('send', 'pageview');
         }
@@ -435,13 +435,13 @@ $(document).ready(function () {
 
         var valueType = Spektral.getType(value);
         if (valueType !== "number") {
-            throwError("gaEvent: Value must be a number.")
+            throw new Error("gaEvent: Value must be a number.")
         }
         if (category === null) {
-            throwError("gaEvent: Category is required.");
+            throw new Error("gaEvent: Category is required.");
         }
         if (category === null) {
-            throwError("gaEvent: Category is required.");
+            throw new Error("gaEvent: Category is required.");
         }
         //Can be more detailed, aka mouseEvent, load event etc.
         type = type || "event";

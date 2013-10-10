@@ -16,17 +16,17 @@
 ////DEVICE WIDTHS FOR MEDIA QUERIES
 /////////////////////////
 @variance: 16px;
-@tabletLandscape: (1024px + @variance);
-@tabletPortrait: (768px + @variance);
-@phoneLandscape: (480px + @variance);
-@phonePortrait: (320px + @variance);
+@smallDisplayLandscape: (1024px + @variance);
+@smallDisplayPortrait: (768px + @variance);
+@mobileLandscape: (1024px);
+@mobilePortrait: (768px);
 
 /////////////////////////
 ////LIST WIDTH
 /////////////////////////
 @defaultWidth: 960px;
-@tabLandWidth: 860px;
-@tabPortWidth: 620px;
+@tabLandWidth: 100%;//860
+@tabPortWidth: 100%;//620
 @phoneLandWidth: 100%;//480
 @phonePortWidth: 100%;//320
 
@@ -286,49 +286,57 @@ footer small {
 
 //////////////////////////////////////////
 /////////////////////////////////////////
-////RESPONSIVE LAYOUTS
+////RESPONSIVE LAYOUTS********************************
 /////////////////////////////////////////
 ///////////////////////////////////////////
 
+///////////////////////////////////
 //Tablet - Landscape - 1024 x 768
-@media all and (max-width: @tabletLandscape) {
+///////////////////////////////////
 
-  section {
-    width: @tabLandWidth;//860px
-  }
+//@media all and (max-width: @smallDisplayLandscape) {
+//
+//  section {
+//    width: @tabLandWidth;//860px
+//  }
+//
+//  section header {
+//    width: @tabLandWidth;//860px
+//    margin: 20px auto;
+//  }
+//
+//  #projectList {
+//    width: @tabLandWidth;//860px
+//  }
+//}
 
-  section header {
-    width: @tabLandWidth;//860px
-    margin: 20px auto;
-  }
-
-  #projectList {
-    width: @tabLandWidth;//860px
-  }
-}
-
+///////////////////////////////////
 //Tablet - Portrait - 768 x 1024
-@media all and (max-width: @tabletPortrait) {
-  #ghBadge {
-    display:none;
-  }
+///////////////////////////////////
+//@media all and (max-width: @smallDisplayPortrait) {
+//  #ghBadge {
+//    display:none;
+//  }
+//
+//  section {
+//    width: @tabPortWidth;//600px
+//  }
+//
+//  section header {
+//    width: @tabPortWidth;//600px
+//    margin: 20px auto;
+//  }
+//
+//  #projectList {
+//    width: @tabPortWidth;//600px
+//  }
+//}
 
-  section {
-    width: @tabPortWidth;//600px
-  }
+///////////////////////////////////
+//Mobile - Landscape - 480 x 320
+///////////////////////////////////
 
-  section header {
-    width: @tabPortWidth;//600px
-    margin: 20px auto;
-  }
-
-  #projectList {
-    width: @tabPortWidth;//600px
-  }
-}
-
-//Smartphone - Landscape - 480 x 320
-@media all and (max-width: @phoneLandscape) {
+@media all and (max-width: @mobileLandscape) {
 
   header h1 {
     text-align: center;
@@ -427,8 +435,11 @@ footer small {
   }
 }
 
-//Smartphone - Portrait - 320 x 480
-@media all and (max-width: @phonePortrait) {
+///////////////////////////////////
+//Mobile - Portrait - 320 x 480
+///////////////////////////////////
+
+@media all and (max-width: @mobilePortrait) {
 
   header h1 {
     text-align: center;

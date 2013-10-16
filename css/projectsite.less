@@ -21,6 +21,9 @@
 @mobileLandscape: (1024px);
 @mobilePortrait: (768px);
 
+@mobileTablet: 1366px;
+@mobilePhone: 768px;
+
 /////////////////////////
 ////LIST WIDTH
 /////////////////////////
@@ -291,52 +294,10 @@ footer small {
 ///////////////////////////////////////////
 
 ///////////////////////////////////
-//Tablet - Landscape - 1024 x 768
+//Mobile - Tablet = Anything < 1366px
 ///////////////////////////////////
 
-//@media all and (max-width: @smallDisplayLandscape) {
-//
-//  section {
-//    width: @tabLandWidth;//860px
-//  }
-//
-//  section header {
-//    width: @tabLandWidth;//860px
-//    margin: 20px auto;
-//  }
-//
-//  #projectList {
-//    width: @tabLandWidth;//860px
-//  }
-//}
-
-///////////////////////////////////
-//Tablet - Portrait - 768 x 1024
-///////////////////////////////////
-//@media all and (max-width: @smallDisplayPortrait) {
-//  #ghBadge {
-//    display:none;
-//  }
-//
-//  section {
-//    width: @tabPortWidth;//600px
-//  }
-//
-//  section header {
-//    width: @tabPortWidth;//600px
-//    margin: 20px auto;
-//  }
-//
-//  #projectList {
-//    width: @tabPortWidth;//600px
-//  }
-//}
-
-///////////////////////////////////
-//Mobile - Landscape - 480 x 320
-///////////////////////////////////
-
-@media all and (max-width: @mobileLandscape) {
+@media all and (max-width: @mobileTablet) {
 
   header h1 {
     text-align: center;
@@ -347,7 +308,7 @@ footer small {
   }
 
   section {
-    width: @phoneLandWidth;//480px
+    width: 100%;
     margin: 0;
     padding: 0;
   }
@@ -357,7 +318,7 @@ footer small {
   }
 
   #projectList {
-    width: @phoneLandWidth;//480px
+    width: 100%;
     margin: 50px 0;
   }
 
@@ -377,19 +338,19 @@ footer small {
   }
 
   li h4 {
-    display:none;
+    //display:none;
   }
 
   li p {
-    display: none;
+    //display: none;
   }
 
   li img {
-    display: none;
+    //display: none;
   }
 
   li a {
-    display: none;
+    //display: none;
   }
 
   #linkedIn {
@@ -436,10 +397,10 @@ footer small {
 }
 
 ///////////////////////////////////
-//Mobile - Portrait - 320 x 480
+//Mobile - Phone = Anything < 768px;
 ///////////////////////////////////
 
-@media all and (max-width: @mobilePortrait) {
+@media all and (max-width: @mobilePhone) {
 
   header h1 {
     text-align: center;
@@ -450,7 +411,7 @@ footer small {
   }
 
   section {
-    width: @phonePortWidth;//480px
+    width: 100%;
     margin: 0;
     padding: 0;
   }
@@ -460,7 +421,7 @@ footer small {
   }
 
   #projectList {
-    width: @phonePortWidth;//480px
+    width: 100%;
     margin: 50px 0;
   }
 

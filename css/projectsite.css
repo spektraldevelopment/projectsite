@@ -204,7 +204,7 @@ footer small {
   font-family: "myriad-pro", sans-serif;
   color: #ffffff;
 }
-@media all and (max-width: 1024px) {
+@media all and (max-width: 1366px) {
   header h1 {
     text-align: center;
   }
@@ -233,18 +233,6 @@ footer small {
   li h3 {
     text-align: center;
     padding: 5px 0px 0px 9px;
-  }
-  li h4 {
-    display: none;
-  }
-  li p {
-    display: none;
-  }
-  li img {
-    display: none;
-  }
-  li a {
-    display: none;
   }
   #linkedIn {
     position: relative;

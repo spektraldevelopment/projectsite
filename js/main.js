@@ -318,8 +318,11 @@ $(document).ready(function () {
     //////////////////
     ////SCROLL TO TOP
     /////////////////
-    function scrollToTop() {
-        scrollToElement('#' + projectDataArray[0].hash);
+    function scrollToTop(e) {
+        var hash = "#" + projectDataArray[0].hash, id = e.target.id;
+        scrollToElement(hash);
+        //Ex. gaEvent("Main Page", "Mouse Click", "Main Page Mouse Click", 5, true);
+        gaEvent("Project Site", "Mouse Click", id + " was clicked. scrollToTop");
     }
 
     //////////////////////
@@ -416,45 +419,53 @@ $(document).ready(function () {
         }
     }
 
-    function gaPageview(page, title) {
-
-        page = page || null;
-        title = page || null;
-        if (page !== null && title !== null) {
-            ga('send', { 'hitType': 'pageview', 'page': page, 'title':  title });
-        } else if (page !== null && title === null) {
-            throw new Error("gaPageview: No title given. Please specify a title.");
-        } else if (page === null && title !== null) {
-            throw new Error("gaPageview: No page given. Please specify a page.");
-        } else {
-            ga('send', 'pageview');
-        }
+    function onGhBadgeClick() {
+        gaEvent("Project Site", "Mouse Click", "GitHub badge clicked.");
     }
 
-    function gaEvent(category, action, type, label, value) {
-
-        var valueType = Spektral.getType(value);
-        if (valueType !== "number") {
-            throw new Error("gaEvent: Value must be a number.")
-        }
-        if (category === null) {
-            throw new Error("gaEvent: Category is required.");
-        }
-        if (category === null) {
-            throw new Error("gaEvent: Category is required.");
-        }
-        //Can be more detailed, aka mouseEvent, load event etc.
-        type = type || "event";
-        label = label || null;
-        value = value || null;
-        if (label === null && value === null) {
-            ga('send', type, category, action);
-        } else if (label !== null) {
-            ga('send', type, category, action, label);
-        } else if (value !== null) {
-            ga('send', type, category, action, label, value);
-        }
+    function onLinkedInClick() {
+        gaEvent("Project Site", "Mouse Click", "LinkedIn badge clicked.");
     }
+
+//    function gaPageview(page, title) {
+//
+//        page = page || null;
+//        title = page || null;
+//        if (page !== null && title !== null) {
+//            ga('send', { 'hitType': 'pageview', 'page': page, 'title':  title });
+//        } else if (page !== null && title === null) {
+//            throw new Error("gaPageview: No title given. Please specify a title.");
+//        } else if (page === null && title !== null) {
+//            throw new Error("gaPageview: No page given. Please specify a page.");
+//        } else {
+//            ga('send', 'pageview');
+//        }
+//    }
+//
+//    function gaEvent(category, action, type, label, value) {
+//
+//        var valueType = Spektral.getType(value);
+//        if (valueType !== "number") {
+//            throw new Error("gaEvent: Value must be a number.")
+//        }
+//        if (category === null) {
+//            throw new Error("gaEvent: Category is required.");
+//        }
+//        if (category === null) {
+//            throw new Error("gaEvent: Category is required.");
+//        }
+//        //Can be more detailed, aka mouseEvent, load event etc.
+//        type = type || "event";
+//        label = label || null;
+//        value = value || null;
+//        if (label === null && value === null) {
+//            ga('send', type, category, action);
+//        } else if (label !== null) {
+//            ga('send', type, category, action, label);
+//        } else if (value !== null) {
+//            ga('send', type, category, action, label, value);
+//        }
+//    }
 
     //AddEventListeners
     attachEventListener(logo, 'click', scrollToTop);
@@ -469,6 +480,12 @@ $(document).ready(function () {
     attachEventListener(window, 'keydown', onKeyboardEvent);
 
     attachEventListener(window, 'scroll', onWindowScroll);
+
+    var ghBadge = document.getElementById("ghBadge");
+    attachEventListener(ghBadge, 'click', onGhBadgeClick);
+
+    var linkedIn = document.getElementById("linkedIn");
+    attachEventListener(linkedIn, 'click', onLinkedInClick);
 
     //Initialize Functions
     getViewportDimensions();

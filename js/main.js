@@ -5,6 +5,7 @@ $(document).ready(function () {
 
     //Self executing function that stops default url bar behaviour when dealing with hash tags
     (function ($) {
+
         $('a[href="#"]').click(function (e) {
             cancelEvent(e);
         });
@@ -28,12 +29,26 @@ $(document).ready(function () {
         VIEWPORT_WIDTH,
         VIEWPORT_HEIGHT,
         DEFAULT_PHONE_WIDTH = 496,
-        currentItem = 0;
+        currentItem = 0,
+        ghBadge = document.getElementById("ghBadge"),
+        linkedIn = document.getElementById("linkedIn"),
+        debug = false;
+
+    //////////////////
+    ////Trace - console log if debug is true
+    /////////////////
+    function Trace(message) {
+
+        if (debug === true) {
+            console.log(message);
+        }
+    }
 
     //////////////////
     ////HIGHLIGHT TEXT
     /////////////////
     function highlightText() {
+
         glowTween = TweenLite.to(this, 0.2, {
             textShadow: "2px 2px 15px rgba(255, 255, 255, 1)"
         });
@@ -50,19 +65,20 @@ $(document).ready(function () {
     ////PARSE JSON
     /////////////////
     function parseJSON() {
+
         $.each(main.jsonFile, function (key, val) {
             projectDataArray = val;
         });
 
         buildList();
-
-        console.log("Parse JSON");
+        Trace("Parse JSON");
     }
 
     //////////////////
     ////CHECK FOR HASH
     //////////////////
     function checkForHash() {
+
         if (listItem) {
             var projectHash, i;
 
@@ -71,42 +87,37 @@ $(document).ready(function () {
 
                 //Check if hashtag is valid
                 if(listItem === projectHash) {
-                    console.log("Hash Found: " + listItem);
+                    Trace("Hash Found: " + listItem);
                     currentItem = $(listItem).index();
                     scrollToElement(listItem);
                     //Check if non-interactive should be set to true or false
                     gaEvent("Project Site", "Hash Used", "First time load, hash tag used: " + listItem, 0, true);
-                } else { console.log("Hash invalid!"); }
+                } else { Trace("Hash invalid!") }
             }
         } else {
-            console.log("No Hash Found!");
+            Trace("No Hash Found!");
         }
 
         var currentHashY = 0;
 
         try {
             currentHashY = $(listItem).position().top - listTopOffset;
-            console.log("CurrentY: " + currentHashY);
+            Trace("CurrentY: " + currentHashY);
         } catch(err) {
-            console.log("currentHashY not set yet.");
+            Trace("currentHashY not set yet.");
         }
 
-        //Detects a hash change in order to
-        //prevent
         $(window).hashchange(function (e) {
             window.scrollTo(0, currentHashY);//Prevents element from jumping to top
 
-            var hash = window.location.hash.substring(1), newTag = document.getElementById(hash);
+            var hash = window.location.hash.substring(1),
+                newTag = document.getElementById(hash);
 
             currentHashY = $(newTag).position().top - listTopOffset;
-
             scrollToElement(newTag);
-
-            console.log("Hash Change: " + location.hash);
+            Trace("Hash Change: " + location.hash);
             gaEvent("Project Site", "Hash Change", "Hash was changed to: " + location.hash, 0, true);
-
             cancelEvent(e);
-            //return false;
         });
     }
 
@@ -114,6 +125,7 @@ $(document).ready(function () {
     ////SET LIST HEIGHT
     ////////////////////
     function setListHeight() {
+
         var projectList = $('#projectList'),
             lastItem = projectList.find('li:last-child'),
             currentListHeight = projectList.height(),
@@ -156,9 +168,9 @@ $(document).ready(function () {
     ////If js is enabled we want to build a dynamic list via JSON data: js/site.json.
     /////////////////
     function buildList() {
+
         var listSection = document.getElementById('listSection'),
-            projectList = document.createElement('ul'),
-            i;
+            projectList = document.createElement('ul'), i;
 
         projectList.id = 'projectList';
         listSection.appendChild(projectList);
@@ -174,7 +186,7 @@ $(document).ready(function () {
         $(window).load(setListHeight());
         attachEventListener(window, 'orientationchange', onWindowResize);
 
-        console.log("Build List: " + projectDataArray.length);
+        Trace("Build List: " + projectDataArray.length);
     }
 
     //////////////////
@@ -246,6 +258,7 @@ $(document).ready(function () {
     ////ON IMAGE ERROR
     ///////////////////
     function onImageError(e) {
+
         var image = e.target;
         image.src = "img/projects/no-image.jpg";
     }
@@ -254,9 +267,10 @@ $(document).ready(function () {
     ////GO TO URL
     ///////////////////
     function gotoURL() {
+
         for(var i = 0; i < projectDataArray.length; i++) {
             if (projectDataArray[i].hash === this.id) {
-                console.log("Navigating to: " + projectDataArray[i].url);
+                Trace("Navigating to: " + projectDataArray[i].url);
                 window.location.href = projectDataArray[i].url;
                 gaEvent("Project Site", "Mouse Click", "Mobile listItem clicked: url: " + projectDataArray[i].url);
             }
@@ -267,6 +281,7 @@ $(document).ready(function () {
     ////ON GO CLICK
     ////////////////////
     function onGoClick(e) {
+
         var parentID = e.target.parentNode.id, url = e.target.href;
         gaEvent("Project Site", "Mouse Click", "GO Button: " + parentID + " url: " + url);
     }
@@ -275,6 +290,7 @@ $(document).ready(function () {
     ////ON TECH LINK CLICK
     ////////////////////
     function onTechLinkClick(e) {
+
         var ID = e.target.innerHTML, url = e.target.href;
         gaEvent("Project Site", "Mouse Click", "Tech Link clicked: " + ID + " url: " + url);
     }
@@ -310,6 +326,7 @@ $(document).ready(function () {
     ////INIT GIT ACTIVITY
     /////////////////
     function initGitActivity() {
+
         try{
         $('#gitActivity').FeedEk({
             FeedUrl : 'https://github.com/spektraldevelopment.atom?=' + Math.random(),
@@ -332,8 +349,7 @@ $(document).ready(function () {
 
         function checkDocReady() {
             docState = document.readyState;
-            console.log("checkDocReady: " + docState);
-
+            Trace("checkDocReady: " + docState);
             if (docState !== 'complete') {
                 setTimeout(checkDocReady, 100);
             } else {
@@ -348,6 +364,7 @@ $(document).ready(function () {
     ////SCROLL TO TOP
     /////////////////
     function scrollToTop(e) {
+
         var hash = "#" + projectDataArray[0].hash, id = e.target.id;
         scrollToElement(hash);
         //Ex. gaEvent("Main Page", "Mouse Click", "Main Page Mouse Click", 5, true);
@@ -358,6 +375,7 @@ $(document).ready(function () {
     ////HIGHLIGHT LINK
     //////////////////////
     function highlightLink() {
+
         glowTween = TweenLite.to(this, 0.2, {
             boxShadow: "0px 0px 25px 2px rgba(235, 127, 0, 1)",
             backgroundColor:"#eb7f00"
@@ -402,13 +420,14 @@ $(document).ready(function () {
     ////GET VIEWPORT DIMENSIONS
     ////////////////////////////
     function getViewportDimensions() {
+
         VIEWPORT_WIDTH = getViewportWidth();
         VIEWPORT_HEIGHT = getViewportHeight();
 
         if (VIEWPORT_WIDTH <= DEFAULT_PHONE_WIDTH) {
             listTopOffset = 120;//Distance from top to bottom of last listItem
         }
-        console.log("Viewport: Width: " + VIEWPORT_WIDTH + " Height: " + VIEWPORT_HEIGHT);
+        Trace("Viewport: Width: " + VIEWPORT_WIDTH + " Height: " + VIEWPORT_HEIGHT);
     }
 
     //////////////////////////////////////
@@ -417,7 +436,6 @@ $(document).ready(function () {
     function onKeyboardEvent(e) {
 
         var key = e.keyCode;
-
         //UP
         if (key === 38) {
             currentItem--;
@@ -425,9 +443,8 @@ $(document).ready(function () {
             {
                 currentItem = 0;
             }
-            console.log("UP");
+            Trace("UP");
         }
-
         //DOWN
         if (key === 40) {
             currentItem++;
@@ -435,19 +452,17 @@ $(document).ready(function () {
             {
                 currentItem = itemArray.length - 1;
             }
-            console.log("DOWN");
+            Trace("DOWN");
         }
 
         scrollToElement(itemArray[currentItem]);
-        console.log("CurrentItem: " + currentItem);
-
+        Trace("CurrentItem: " + currentItem);
         cancelEvent(e);
     }
 
     function onWindowScroll() {
 
         var vWidth = getViewportWidth();
-
         if (vWidth <= 480) {
             $('header').css({ top: '0px' });
         }
@@ -464,21 +479,13 @@ $(document).ready(function () {
     //AddEventListeners
     attachEventListener(logo, 'click', scrollToTop);
     attachEventListener(projectsTitle, 'click', scrollToTop);
-
     attachEventListener(logo, 'mouseover', highlightText);
     attachEventListener(projectsTitle, 'mouseover', highlightText);
-
     attachEventListener(logo, 'mouseout', removeTextGlow);
     attachEventListener(projectsTitle, 'mouseout', removeTextGlow);
-
     attachEventListener(window, 'keydown', onKeyboardEvent);
-
     attachEventListener(window, 'scroll', onWindowScroll);
-
-    var ghBadge = document.getElementById("ghBadge");
     attachEventListener(ghBadge, 'click', onGhBadgeClick);
-
-    var linkedIn = document.getElementById("linkedIn");
     attachEventListener(linkedIn, 'click', onLinkedInClick);
 
     //Initialize Functions
@@ -487,7 +494,7 @@ $(document).ready(function () {
     initCopyright();
     initGitActivity();
 
-    console.log('Init Spektral Projects');
+    Trace('Init Spektral Projects');
 });
 
 

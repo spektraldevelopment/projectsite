@@ -75,3 +75,30 @@ function cancelPropogation(e) {
         e.cancelBubble = true;
     }
 }
+
+function gaEvent(category, action, label, value, nonInteract) {
+    //alert("gaEvent called: " + label);
+    //Ex. gaEvent("Main Page", "Mouse Click", "Main Page Mouse Click", 5, true);
+    if (category === null) {
+        throw new Error("gaEvent: Category is required.");
+    }
+    if(action === null) {
+        throw new Error("gaEvent: Action is required.")
+    }
+    //Can be more detailed, aka mouseEvent, load event etc.
+    label = label || null;
+    value = value || null;
+    //_trackEvent(category, action, label, value, nonInteraction)
+    nonInteract = nonInteract || false;
+
+    if(value === null && nonInteract === false) {
+        _gaq.push(['_trackEvent', category, action, label]);
+    } else {
+        _gaq.push(['_trackEvent', category, action, label, value, nonInteract]);
+    }
+    console.log("gaEvent: category: " + category
+        + " action: " + action
+        + " label: " + label
+        + " value: " + value
+        + " nonInteract: " + nonInteract);
+}

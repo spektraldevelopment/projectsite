@@ -72,6 +72,8 @@ $(document).ready(function () {
                     console.log("Hash Found: " + listItem);
                     currentItem = $(listItem).index();
                     scrollToElement(listItem);
+                    //Check if non-interactive should be set to true or false
+                    gaEvent("Project Site", "Hash Used", "First time load, hash tag used: " + listItem, 0, true);
                 } else { console.log("Hash invalid!"); }
             }
         } else {
@@ -100,6 +102,7 @@ $(document).ready(function () {
             scrollToElement(newTag);
 
             console.log("Hash Change: " + location.hash);
+            gaEvent("Project Site", "Hash Change", "Hash was changed to: " + location.hash, 0, true);
 
             cancelEvent(e);
             //return false;
@@ -211,6 +214,8 @@ $(document).ready(function () {
         link.innerHTML = "GO";
         listItem.appendChild(link);
 
+        attachEventListener(link, 'click', onGoClick);
+
         attachEventListener(link, 'mouseover', highlightLink);
         attachEventListener(link, 'mouseout', removeHighlight);
 
@@ -221,6 +226,7 @@ $(document).ready(function () {
         for( var i =0; i < aTagTech.length; i += 1) {
             attachEventListener(aTagTech[i], 'mouseover', highlightText);
             attachEventListener(aTagTech[i], 'mouseout', removeTextGlow);
+            attachEventListener(aTagTech[i], 'click', onTechLinkClick);
         }
 
         if(id === 0) {
@@ -236,7 +242,6 @@ $(document).ready(function () {
     function onImageError(e) {
         var image = e.target;
         image.src = "img/projects/no-image.jpg";
-        console.log("Image Error: " + e.target);
     }
 
     ///////////////////
@@ -247,8 +252,25 @@ $(document).ready(function () {
             if(projectDataArray[i].hash === this.id) {
                 console.log("Navigating to: " + projectDataArray[i].url);
                 window.location.href = projectDataArray[i].url;
+                gaEvent("Project Site", "Mouse Click", "Mobile listItem clicked: url: " + projectDataArray[i].url);
             }
         }
+    }
+
+    ////////////////////
+    ////ON GO CLICK
+    ////////////////////
+    function onGoClick(e) {
+        var parentID = e.target.parentNode.id, url = e.target.href;
+        gaEvent("Project Site", "Mouse Click", "GO Button: " + parentID + " url: " + url);
+    }
+
+    ////////////////////
+    ////ON TECH LINK CLICK
+    ////////////////////
+    function onTechLinkClick(e) {
+        var ID = e.target.innerHTML, url = e.target.href;
+        gaEvent("Project Site", "Mouse Click", "Tech Link clicked: " + ID + " url: " + url);
     }
 
     ///////////////////
@@ -356,12 +378,14 @@ $(document).ready(function () {
     ////CHECK FOR ITEM
     ///////////////////////////////////
     function checkForItem(e) {
+
+        var ID = this.id;
         if(e === "down") {
             TweenLite.to(this, 0.5, { opacity: 0});
         } else {
             TweenLite.to(this, 0.5, { opacity: 1});
         }
-        //console.log("Waypoint Hit: " + e + " ID: " + this.id + " TOP: " + $(this).offset().top);
+        gaEvent("Project Site", "Waypoint Event", "Scrolled to: " + ID, null, true);
     }
 
     ////////////////////////////

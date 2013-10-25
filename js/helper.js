@@ -83,7 +83,7 @@ function gaEvent(category, action, label, value, nonInteract) {
         throw new Error("gaEvent: Category is required.");
     }
     if(action === null) {
-        throw new Error("gaEvent: Action is required.")
+        throw new Error("gaEvent: Action is required.");
     }
     //Can be more detailed, aka mouseEvent, load event etc.
     label = label || null;
@@ -96,9 +96,9 @@ function gaEvent(category, action, label, value, nonInteract) {
     } else {
         _gaq.push(['_trackEvent', category, action, label, value, nonInteract]);
     }
-    console.log("gaEvent: category: " + category
-        + " action: " + action
-        + " label: " + label
-        + " value: " + value
-        + " nonInteract: " + nonInteract);
+    console.log("gaEvent: category: " + category +
+        " action: " + action +
+        " label: " + label +
+        " value: " + value +
+        " nonInteract: " + nonInteract);
 }

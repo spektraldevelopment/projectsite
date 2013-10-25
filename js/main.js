@@ -114,8 +114,9 @@ $(document).ready(function () {
     ////SET LIST HEIGHT
     ////////////////////
     function setListHeight() {
-        var lastItem = $('#projectList li:last-child'),
-            currentListHeight = $('#projectList').height(),
+        var projectList = $('#projectList'),
+            lastItem = projectList.find('li:last-child'),
+            currentListHeight = projectList.height(),
             itemHeight = lastItem.outerHeight(),
             itemMargin = parseInt(lastItem.css('margin-bottom'), 10);
 
@@ -132,8 +133,9 @@ $(document).ready(function () {
     function resetListHeight() {
         //The item height and item margin don't change so I might make them a global var and set them once
         //To save processor time
-        var itemHeight = $('#projectList li:last-child').outerHeight(),
-            itemMargin = parseInt($('#projectList li:last-child').css('margin-bottom'), 10),
+        var lastItem = $('#projectList').find('li:last-child'),
+            itemHeight = lastItem.outerHeight(),
+            itemMargin = parseInt(lastItem.css('margin-bottom'), 10),
             adjustedListHeight;
 
         VIEWPORT_HEIGHT = getViewportHeight();
@@ -227,8 +229,6 @@ $(document).ready(function () {
 
         aTagTech = document.getElementsByClassName("techLink");
 
-        console.log("techTagType: " + Spektral.getType(aTagTech));
-
         for(i =0; i < aTagTech.length; i += 1) {
             attachEventListener(aTagTech[i], 'mouseover', highlightText);
             attachEventListener(aTagTech[i], 'mouseout', removeTextGlow);
@@ -301,10 +301,9 @@ $(document).ready(function () {
 
        var d = new Date(),
            y = d.getFullYear(),
-           currentYear = document.getElementById("copyright"),
-           copyString = "Copyright &copy; " + y;;
+           currentYear = document.getElementById("copyright");
 
-       currentYear.innerHTML = copyString;
+       currentYear.innerHTML = "Copyright &copy; " + y;
     }
 
     //////////////////

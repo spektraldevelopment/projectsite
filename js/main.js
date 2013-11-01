@@ -284,7 +284,6 @@ $(document).ready(function () {
         Trace("GO");
         var parentID = e.target.parentNode.id, url = e.target.href;
         gaEvent("Project Site", "Mouse Click", "GO Button: " + parentID + " url: " + url);
-        cancelEvent(e);
     }
 
     ////////////////////

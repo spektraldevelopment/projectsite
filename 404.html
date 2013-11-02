@@ -18,8 +18,8 @@
                 padding: 30px 10px;
                 font-size: 20px;
                 line-height: 1.4;
-                color: #737373;
-                background: #f0f0f0;
+                color: #000;
+                background: #000;
                 -webkit-text-size-adjust: 100%;
                 -ms-text-size-adjust: 100%;
             }
@@ -37,7 +37,7 @@
                 border-radius: 4px;
                 margin: 0 auto;
                 box-shadow: 0 1px 10px #a7a7a7, inset 0 1px 0 #fff;
-                background: #fcfcfc;
+                background: #225378;
             }
 
             h1 {
@@ -47,7 +47,7 @@
             }
 
             h1 span {
-                color: #bbb;
+                color: #eb7f00;
             }
 
             h3 {
@@ -61,6 +61,12 @@
             ul {
                 padding: 0 0 0 40px;
                 margin: 1em 0;
+            }
+
+            img {
+                display: block;
+                margin: 0 auto;
+                border: 5px solid white;
             }
 
             .container {
@@ -141,6 +147,7 @@
     </head>
     <body>
         <div class="container">
+            <img alt="Spektral Logo" src="data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMtaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjAtYzA2MSA2NC4xNDA5NDksIDIwMTAvMTIvMDctMTA6NTc6MDEgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUuMSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MUFBOTVENzIxQjNBMTFFM0IwNDk4MEM5QTRENDdDNzciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MUFBOTVENzMxQjNBMTFFM0IwNDk4MEM5QTRENDdDNzciPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo3QjA1NEVENzE5QjQxMUUzQjA0OTgwQzlBNEQ0N0M3NyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3QjA1NEVEODE5QjQxMUUzQjA0OTgwQzlBNEQ0N0M3NyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pv/uAA5BZG9iZQBkwAAAAAH/2wCEAAYEBAQFBAYFBQYJBgUGCQsI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" />
             <h1>Not found <span>:(</span></h1>
             <p>Sorry, but the page you were trying to view does not exist.</p>
             <p>It looks like this was the result of either:</p>

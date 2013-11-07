@@ -41,6 +41,23 @@
 @paragraph: "myriad-pro", sans-serif;
 
 ///////////////////////////
+////MIXINS
+///////////////////////////
+.shadow (@hOffset: inset, @vOffset: 0px, @blur: 0px, @spread: 5px, @color: #000) {
+  -moz-box-shadow: @hOffset @vOffset @blur @spread @color;
+  -webkit-box-shadow: @hOffset @vOffset @blur @spread @color;
+  box-shadow: @hOffset @vOffset @blur @spread @color;
+}
+
+.textShadow (@X: 1px, @Y: 1px, @blur: 3px, @color: #888) {
+  text-shadow: @X @Y @blur @color;
+}
+
+.transparentBG (@color, @alpha) {
+  background-color: rgba(red(@color), green(@color), blue(@color), @alpha);
+}
+
+///////////////////////////
 //Global Styling
 ///////////////////////////
 html,
@@ -64,7 +81,8 @@ header {
   margin: 0 auto;
   padding:0;
   z-index: 10;
-  background-color: rgba(red(@dark-blue), green(@dark-blue), blue(@dark-blue), .95);
+  .transparentBG(@dark-blue, 0.95);
+  .shadow();
 }
 
 header h1 {
@@ -75,8 +93,6 @@ header h1 {
   padding: 0;
   font-size: 40px;
   font-family: @header;
-  color: @white;
-  //visibility: hidden;
 }
 
 //Hides/shows text that is using typekit once font is loaded
@@ -95,6 +111,7 @@ header h1 {
 }
 
 header h1 a {
+  .textShadow();
   text-decoration: none;
   color: @white;
 }
@@ -102,10 +119,13 @@ header h1 a {
 section header {
   width:@defaultWidth;//960px
   margin: 20px auto;
-  background-color: rgba(red(@orange), green(@orange), blue(@orange), .95);
+  //background-color: rgba(red(@orange), green(@orange), blue(@orange), .95);
+  .transparentBG(@orange, 0.95);
+  .shadow();
 }
 
 section header h2 {
+  .textShadow();
   position:relative;
   margin: 0;
   padding: 0;
@@ -230,7 +250,8 @@ footer {
   width:100%;
   height: 20px;
   margin: 0 auto;//Do I need this?
-  background-color: @dark-blue;
+  .transparentBG(@dark-blue, 0.95);
+  .shadow();
 }
 
 #linkedIn {

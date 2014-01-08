@@ -36,19 +36,19 @@
             <noscript>
                 <ul style="padding: 80px 0;">
                     <li>
-                        <h3>Project: Project Site</h3>
-                        <img src="img/projects/no-image.jpg" alt="Project Site"/>
-                        <p>Welcome! I built this site with nothing but my bare hands ( and by bare hands I mean a computer, a stack of reference books, and the internet ). These are personal projects I'm currently working on, they range from "complete" to "still in the works". Hopefully, within these pages you may learn something you didn't know, or find something that will save you precious time when you're approaching that dreaded deadline. Enjoy!</p>
-                        <h4>Technology: jQuery, GSAP, LESS, Preloadjs</h4>
-                        <a href="#site" class="gotoSite">Go</a>
-                    </li>
-
-                    <li>
                         <h3>Project: Spektraljs</h3>
                         <img src="img/projects/no-image.jpg" alt="Spektraljs"/>
                         <p>Soon into my working with JS, I realized that I was amassing a collection of reusable code that I needed on a regular basis. At first I put them in their own separate JS file, but soon I wrapped an anonymous function around them and set out to create a library of my own. Now you might say \"Why would you do that when you can just use jQuery, Dojo, Moo Tools etc. ?\" I do use those libraries, and they're great, but I like to know my code inside and out.  Plus building a library is a great way to learn the ins and outs of JavaScript. Currently the project is in it's infancy, theirs no documentation yet and no minified version ( something I hope to address in the near future). You can check out my progress on GitHub or just click the \"GO\" button to have a look.</p>
                         <h4>Technology: Javascript</h4>
                         <a href="http://github.com/spektraldevelopment/spektraljs" class="gotoSite">Go</a>
+                    </li>
+
+                    <li>
+                        <h3>Project: Masonry Showdown</h3>
+                        <img src="img/projects/no-image.jpg" alt="Masonry Showdown"/>
+                        <p>I wanted to get a feel for a handful of the most popular masonry plugins, to determine there ease of use. I found that Masonry and Isotope were the most established and easy to use, the options and documentation were helpful. I did find however that all plugins work better in a container with a fixed width, when it came to producing a precise look.That being said, they are able to be adapted to a responsive layout.</p>
+                        <h4>Technology: Javascript, Masonry, Wookmark, Salvattore, Isotope</h4>
+                        <a href="http://spektraldevelopment.com/projects/masonryshowdown/" class="gotoSite">Go</a>
                     </li>
 
                     <li>
@@ -60,11 +60,11 @@
                     </li>
 
                     <li>
-                        <h3>Project: The Randomizer</h3>
-                        <img src="img/projects/no-image.jpg" alt="The Randomizer"/>
-                        <p>I will attempt to port a Flash application I made a few years back into JS. The randomizer utilized the YouTube API. It basically takes any YouTube video and allows the user to loop and randomize the video resulting in some unintentional hilarious, albeit bizarre results. Hopefully the JS version of the YouTube API will be up to task performance wise. More to come...</p>
-                        <h4>Technology: Javascript, YouTube API</h4>
-                        <a href="http://github.com/spektraldevelopment/therandomizer" class="gotoSite">Go</a>
+                        <h3>Project: Project Site</h3>
+                        <img src="img/projects/no-image.jpg" alt="Project Site"/>
+                        <p>Welcome! I built this site with nothing but my bare hands ( and by bare hands I mean a computer, a stack of reference books, and the internet ). These are personal projects I'm currently working on, they range from "complete" to "still in the works". Hopefully, within these pages you may learn something you didn't know, or find something that will save you precious time when you're approaching that dreaded deadline. Enjoy!</p>
+                        <h4>Technology: jQuery, GSAP, LESS, Preloadjs</h4>
+                        <a href="#site" class="gotoSite">Go</a>
                     </li>
                 </ul>
             </noscript>
@@ -118,10 +118,10 @@
             //GLOBAL
             var jsonFile, preloader, descriptions, descArray = [], i;
             descriptions = [
-                "desc/ProjectSite.txt",
                 "desc/Spektraljs.txt",
+                "desc/MasonryShowdown.txt",
                 "desc/Portfolio.txt",
-                "desc/TheRandomizer.txt"];
+                "desc/ProjectSite.txt"];
 
             //Preload all needed scripts
             preloader = new createjs.LoadQueue(false, "");

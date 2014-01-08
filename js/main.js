@@ -247,7 +247,7 @@ $(document).ready(function () {
             attachEventListener(aTagTech[i], 'click', onTechLinkClick);
         }
 
-        if (id === 0) {
+        if (id === 3) {
            link.setAttribute("style", "visibility: hidden");
         }
 

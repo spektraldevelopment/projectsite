@@ -2,20 +2,20 @@
     "projects" : [
 
         {
-            "title" : "Project: Project Site",
-            "hash" : "site",
-            "thumb" : "img/projects/project-site.jpg",
-            "desc" : "desc/ProjectSite.txt",
-            "url" : "#site",
-            "tech" : "JavaScript, <a class=\"techLink\" href=\"http://lesscss.org\">LESS</a>, <a class=\"techLink\" href=\"http://jquery.com/\">jQuery</a>, <a class=\"techLink\" href=\"https://typekit.com/\">Typekit</a>, <a class=\"techLink\" href=\"http://www.createjs.com/#!/PreloadJS\">PreloadJS</a>"
-        },
-        {
             "title" : "Project: Spektraljs",
             "hash" : "spektraljs",
             "thumb" : "img/projects/spektraljs.jpg",
             "desc" : "desc/Spektraljs.txt",
             "url" : "http://github.com/spektraldevelopment/spektraljs",
             "tech" : "JavaScript"
+        },
+        {
+            "title" : "Project: Masonry Showdown",
+            "hash" : "masonryshowdown",
+            "thumb" : "img/no-image.jpg",
+            "desc" : "desc/MasonryShowdown.txt",
+            "url" : "http://spektraldevelopment.com/projects/masonryshowdown/",
+            "tech" : "JavaScript, <a class=\"techLink\" href=\"http://masonry.desandro.com/\">Masonry</a>, <a class=\"techLink\" href=\"http://www.wookmark.com/jquery-plugin\">Wookmark</a>, <a class=\"techLink\" href=\"http://www.salvattore.com\">Salvattore</a>, <a class=\"techLink\" href=\"http://isotope.metafizzy.co/\">Isotope</a>"
         },
         {
             "title" : "Project: Portfolio",
@@ -26,12 +26,12 @@
             "tech" : "JavaScript, <a class=\"techLink\" href=\"http://www.greensock.com/gsap-js/\">GSAP</a>, <a class=\"techLink\" href=\"https://typekit.com/\">Typekit</a>, <a class=\"techLink\" href=\"http://www.createjs.com/#!/EaselJS\">EaselJS</a>"
         },
         {
-            "title" : "Project: The Randomizer",
-            "hash" : "therandomizer",
-            "thumb" : "img/projects/the-randomizer.jpg",
-            "desc" : "desc/TheRandomizer.txt",
-            "url" : "http://github.com/spektraldevelopment/therandomizer",
-            "tech" : "JavaScript, <a class=\"techLink\" href=\"https://developers.google.com/youtube/js_api_reference\">YouTube API</a>"
+            "title" : "Project: Project Site",
+            "hash" : "site",
+            "thumb" : "img/projects/project-site.jpg",
+            "desc" : "desc/ProjectSite.txt",
+            "url" : "#site",
+            "tech" : "JavaScript, <a class=\"techLink\" href=\"http://lesscss.org\">LESS</a>, <a class=\"techLink\" href=\"http://jquery.com/\">jQuery</a>, <a class=\"techLink\" href=\"https://typekit.com/\">Typekit</a>, <a class=\"techLink\" href=\"http://www.createjs.com/#!/PreloadJS\">PreloadJS</a>"
         }
    ]
 }

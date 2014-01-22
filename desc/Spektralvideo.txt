@@ -1,0 +1,1 @@
+A Javascript library for working with the HTML5 video element. I'm working to make this library as versatile, and multi-featured as is technically possible.

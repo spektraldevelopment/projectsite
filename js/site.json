@@ -6,7 +6,15 @@
             "hash" : "spektraljs",
             "thumb" : "img/projects/spektraljs.jpg",
             "desc" : "desc/Spektraljs.txt",
-            "url" : "http://github.com/spektraldevelopment/spektraljs",
+            "url" : "http://spektraldevelopment.com/projects/spektraljs",
+            "tech" : "JavaScript"
+        },
+        {
+            "title" : "Project: Spektralvideo",
+            "hash" : "spektralvideo",
+            "thumb" : "img/projects/spektralvideo.jpg",
+            "desc" : "desc/Spektralvideo.txt",
+            "url" : "http://spektraldevelopment.com/projects/spektralvideo",
             "tech" : "JavaScript"
         },
         {
